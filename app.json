@@ -1,0 +1,7 @@
+{
+  "name": "Demeter",
+  "displayName": "Demeter",
+  "expo": {
+    "plugins": ["react-native-wifi-reborn"]
+  }
+}
