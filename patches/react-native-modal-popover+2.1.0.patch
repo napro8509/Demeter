@@ -1,0 +1,139 @@
+diff --git a/node_modules/react-native-modal-popover/lib/Popover.js b/node_modules/react-native-modal-popover/lib/Popover.js
+index ddd7fb2..de5a4f4 100644
+--- a/node_modules/react-native-modal-popover/lib/Popover.js
++++ b/node_modules/react-native-modal-popover/lib/Popover.js
+@@ -203,11 +203,11 @@ class Popover extends React.PureComponent {
+         this.onOrientationChange();
+     }
+     componentDidMount() {
+-        react_native_1.Dimensions.addEventListener('change', this.onOrientationChange);
++        this.listener = react_native_1.Dimensions.addEventListener('change', this.onOrientationChange);
+     }
+     componentWillUnmount() {
+-        react_native_1.Dimensions.removeEventListener('change', this.onOrientationChange);
+-    }
++		this.listener?.remove?.();
++	}
+     UNSAFE_componentWillReceiveProps(nextProps) {
+         const willBeVisible = nextProps.visible;
+         const { visible, fromRect, displayArea } = this.props;
+diff --git a/node_modules/react-native-modal-popover/lib/PopoverController.js b/node_modules/react-native-modal-popover/lib/PopoverController.js
+index 005c07f..9a0eb11 100644
+--- a/node_modules/react-native-modal-popover/lib/PopoverController.js
++++ b/node_modules/react-native-modal-popover/lib/PopoverController.js
+@@ -62,10 +62,10 @@ class PopoverController extends React.PureComponent {
+         this.closePopover = () => this.setState({ showPopover: false });
+     }
+     componentDidMount() {
+-        react_native_1.Dimensions.addEventListener('change', this.onOrientationChange);
++        this.listener = react_native_1.Dimensions.addEventListener('change', this.onOrientationChange);
+     }
+     componentWillUnmount() {
+-        react_native_1.Dimensions.removeEventListener('change', this.onOrientationChange);
++		this.listener?.remove?.();
+     }
+     render() {
+         return this.props.children({
+diff --git a/node_modules/react-native-modal-popover/lib/PopoverTouchable.js b/node_modules/react-native-modal-popover/lib/PopoverTouchable.js
+index 09c205f..2324b72 100644
+--- a/node_modules/react-native-modal-popover/lib/PopoverTouchable.js
++++ b/node_modules/react-native-modal-popover/lib/PopoverTouchable.js
+@@ -58,10 +58,10 @@ class PopoverTouchable extends React.PureComponent {
+         };
+     }
+     componentDidMount() {
+-        react_native_1.Dimensions.addEventListener('change', this.onOrientationChange);
++       	this.listener = react_native_1.Dimensions.addEventListener('change', this.onOrientationChange);
+     }
+     componentWillUnmount() {
+-        react_native_1.Dimensions.removeEventListener('change', this.onOrientationChange);
++		this.listener?.remove?.();
+     }
+     render() {
+         const children = React.Children.toArray(this.props.children);
+diff --git a/node_modules/react-native-modal-popover/lib/usePopover.js b/node_modules/react-native-modal-popover/lib/usePopover.js
+index 75cc72a..820f98d 100644
+--- a/node_modules/react-native-modal-popover/lib/usePopover.js
++++ b/node_modules/react-native-modal-popover/lib/usePopover.js
+@@ -45,9 +45,9 @@ function usePopover(calculateStatusBar = false) {
+                 requestAnimationFrame(openPopover);
+             }
+         };
+-        react_native_1.Dimensions.addEventListener('change', onOrientationChange);
++        const listener = react_native_1.Dimensions.addEventListener('change', onOrientationChange);
+         return () => {
+-            react_native_1.Dimensions.removeEventListener('change', onOrientationChange);
++			listener?.remove?.();
+         };
+     }, [showPopover, openPopover]);
+     return result;
+diff --git a/node_modules/react-native-modal-popover/src/Popover.tsx b/node_modules/react-native-modal-popover/src/Popover.tsx
+index 87a449c..4532e25 100644
+--- a/node_modules/react-native-modal-popover/src/Popover.tsx
++++ b/node_modules/react-native-modal-popover/src/Popover.tsx
+@@ -171,11 +171,11 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
+   }
+ 
+   componentDidMount() {
+-    Dimensions.addEventListener('change', this.onOrientationChange);
++    this.listener = Dimensions.addEventListener('change', this.onOrientationChange);
+   }
+ 
+   componentWillUnmount() {
+-    Dimensions.removeEventListener('change', this.onOrientationChange);
++	this.listener?.remove?.();
+   }
+ 
+   private computeGeometry = (
+diff --git a/node_modules/react-native-modal-popover/src/PopoverController.tsx b/node_modules/react-native-modal-popover/src/PopoverController.tsx
+index a5e6e32..153c2be 100644
+--- a/node_modules/react-native-modal-popover/src/PopoverController.tsx
++++ b/node_modules/react-native-modal-popover/src/PopoverController.tsx
+@@ -39,11 +39,11 @@ export class PopoverController extends React.PureComponent<Props, State> {
+   };
+ 
+   componentDidMount() {
+-    Dimensions.addEventListener('change', this.onOrientationChange);
++   this.listener = Dimensions.addEventListener('change', this.onOrientationChange);
+   }
+ 
+   componentWillUnmount() {
+-    Dimensions.removeEventListener('change', this.onOrientationChange);
++	  this.listener?.remove?.();
+   }
+ 
+   private onOrientationChange = () => {
+diff --git a/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx b/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx
+index cbb7526..78e2cab 100644
+--- a/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx
++++ b/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx
+@@ -33,11 +33,11 @@ export class PopoverTouchable extends React.PureComponent<Props, State> {
+   }
+ 
+   componentDidMount() {
+-    Dimensions.addEventListener('change', this.onOrientationChange);
++    this.listener = Dimensions.addEventListener('change', this.onOrientationChange);
+   }
+ 
+   componentWillUnmount() {
+-    Dimensions.removeEventListener('change', this.onOrientationChange);
++	this.listener?.remove?.();
+   }
+ 
+   private onOrientationChange = () => {
+diff --git a/node_modules/react-native-modal-popover/src/usePopover.ts b/node_modules/react-native-modal-popover/src/usePopover.ts
+index 2d05b78..1fbb8aa 100644
+--- a/node_modules/react-native-modal-popover/src/usePopover.ts
++++ b/node_modules/react-native-modal-popover/src/usePopover.ts
+@@ -78,9 +78,9 @@ export function usePopover(calculateStatusBar = false): UsePopoverHook {
+         requestAnimationFrame(openPopover);
+       }
+     };
+-    Dimensions.addEventListener('change', onOrientationChange);
++    const listener = Dimensions.addEventListener('change', onOrientationChange);
+     return () => {
+-      Dimensions.removeEventListener('change', onOrientationChange);
++		listener?.remove?.();
+     };
+   }, [showPopover, openPopover]);
+ 
