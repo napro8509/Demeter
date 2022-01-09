@@ -20,6 +20,29 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>demeter</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>demeter</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>test</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>45e3r.app.link</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -36,7 +59,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,5 +74,22 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>branch_app_domain</key>
+	<string>45e3r.app.link</string>
+	<key>branch_universal_link_domains</key>
+	<string>45e3r.app.link</string>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_gp8x4WbflfnDFKdgfq0lVbnhtFmJh9PG</string>
+		<key>test</key>
+		<string>key_test_al0r85kkbfkuELgblIpP6ppetujGj3S6</string>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

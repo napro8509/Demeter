@@ -1,33 +1,46 @@
 {
-  "name": "Demeter",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@react-navigation/native": "^6.0.6",
-    "react": "17.0.2",
-    "react-native": "0.66.4",
-    "react-native-safe-area-context": "^3.3.2",
-    "react-native-screens": "^3.10.1",
-    "react-native-wifi-reborn": "^4.5.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "7.14.0",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.66.2",
-    "react-test-renderer": "17.0.2"
-  },
-  "jest": {
-    "preset": "react-native"
-  }
+	"name": "Demeter",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"android": "react-native run-android",
+		"ios": "react-native run-ios",
+		"start": "react-native start",
+		"test": "jest",
+		"lint": "eslint ."
+	},
+	"dependencies": {
+		"@react-navigation/native": "^6.0.6",
+		"@react-navigation/native-stack": "^6.2.5",
+		"axios": "^0.24.0",
+		"react": "17.0.2",
+		"react-native": "0.66.4",
+		"react-native-branch": "^5.0.0",
+		"react-native-esptouch": "^1.1.5",
+		"react-native-safe-area-context": "^3.3.2",
+		"react-native-screens": "^3.10.1",
+		"react-native-wifi-reborn": "^4.5.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.12.9",
+		"@babel/runtime": "^7.12.5",
+		"@react-native-community/eslint-config": "^2.0.0",
+		"babel-eslint": "^10.1.0",
+		"babel-jest": "^26.6.3",
+		"babel-plugin-module-resolver": "^4.1.0",
+		"babel-plugin-transform-remove-console": "^6.9.4",
+		"eslint": "^7.14.0",
+		"eslint-config-airbnb": "^18.2.1",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.23.4",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-react": "^7.28.0",
+		"eslint-plugin-react-native": "^3.11.0",
+		"jest": "^26.6.3",
+		"metro-react-native-babel-preset": "^0.66.2",
+		"react-test-renderer": "17.0.2"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
 }
