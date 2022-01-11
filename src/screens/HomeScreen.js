@@ -5,7 +5,7 @@ import Images from '../assets/images';
 
 const HomeScreen = ({ navigation }) => {
 	const handleAddProject = () => {
-		navigation.navigate('CreateProjectScreen');
+		navigation.navigate('SelectProjectScreen');
 	};
 
 	return (

@@ -1,117 +1,60 @@
-import React, { useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors } from '../assets/colors';
+import React from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Images from '../assets/images';
 import { Button } from '../components';
+import Flex from '../components/Flex';
+import Input from '../components/Input';
 import useHeader from '../hooks/useHeader';
-import DeviceHelper from '../utils/DeviceHelper';
-
-const data = [
-	{
-		icon: Images.ic_project_agircuture,
-		name: 'Agriculture',
-	},
-	{
-		icon: Images.ic_project_smarthome,
-		name: 'Smart home',
-	},
-	{
-		icon: Images.ic_project_education,
-		name: 'Education',
-	},
-	{
-		icon: Images.ic_project_medical,
-		name: 'Medical',
-	},
-	{
-		icon: Images.ic_project_industrial,
-		name: 'Industrial',
-	},
-	{
-		icon: Images.ic_project_weatherstation,
-		name: 'Weather Station',
-	},
-	{
-		icon: Images.ic_project_gis,
-		name: 'GIS',
-	},
-	{
-		icon: Images.ic_project_other,
-		name: 'Others',
-	},
-];
-
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 const CreateProject = ({ navigation }) => {
 	useHeader(navigation);
-	const [selectedType, setSelectedType] = useState(null);
 
-	const keyExtractor = item => item.name;
+	const handleSelectImage = async () => {
+		const result = await launchImageLibrary({
+			mediaType: 'photo',
+		});
+		console.log(result);
+	};
 
-	const renderItem = ({ item, index }) => (
-		<View style={{ flex: 1 / 3 }}>
-			<TouchableOpacity style={styles.projectItem}>
-				<Image source={item.icon} style={styles.iconProject} />
-			</TouchableOpacity>
-		</View>
-	);
-
+	const handleCreateProject = () => {};
 	return (
-		<View style={styles.container}>
-			<Text style={styles.projectType}>Choose a Project Type</Text>
-			<FlatList
-				numColumns={3}
-				data={data}
-				renderItem={renderItem}
-				keyExtractor={keyExtractor}
-				columnWrapperStyle={styles.column}
-			/>
-			<Button title='Create Project' style={styles.button} />
-		</View>
+		<Flex style={styles.container} keyboardAvoidView>
+			<ScrollView style={styles.wrapper}>
+				<TouchableOpacity style={styles.button} onPress={handleSelectImage}>
+					<Image source={Images.ic_add_image} style={styles.addButton} />
+				</TouchableOpacity>
+				<Input leftText='Project Name' containerStyle={styles.input} />
+				<Input leftText='Location' containerStyle={styles.input} />
+				<Input leftText='Area' containerStyle={styles.input} />
+			</ScrollView>
+			<Button title='Create Project' style={styles.buttonEnd} onPress={handleCreateProject} />
+		</Flex>
 	);
 };
 
 export default CreateProject;
 
 const styles = StyleSheet.create({
-	button: {
-		marginBottom: 20,
+	addButton: {
+		height: 80,
+		width: 80,
 	},
-	column: {
-		flex: 1,
+	button: {
+		alignSelf: 'center',
 		marginTop: 20,
+	},
+	buttonEnd: {
+		marginBottom: 20,
+		marginHorizontal: 20,
 	},
 	container: {
-		backgroundColor: Colors.white,
-		flex: 1,
-		paddingHorizontal: 20,
-	},
-	content: {
 		flex: 1,
 	},
-	flex: {
-		alignItems: 'center',
-		backgroundColor: 'red',
-		justifyContent: 'center',
-		width: (DeviceHelper.screenWidth - 80) / 3,
+	input: {
+		marginHorizontal: 20,
+		marginTop: 16,
 	},
-	iconProject: {
-		height: 50,
-		width: 50,
-	},
-	projectItem: {
-		alignItems: 'center',
-		borderColor: 'rgba(224, 224, 224, 1)',
-		borderRadius: 49,
-		borderWidth: 1,
-		height: 98,
-		justifyContent: 'center',
-		width: 98,
-	},
-	projectType: {
-		color: Colors.darkGray,
-		fontSize: 17,
-		fontWeight: '500',
-		marginTop: 20,
-		textAlign: 'center',
+	wrapper: {
+		flex: 1,
 	},
 });

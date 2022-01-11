@@ -14,6 +14,7 @@ const Input = forwardRef(
 			rightIconStyle,
 			containerStyle,
 			showCheck,
+			leftText,
 			defaultValue,
 			...otherProps
 		},
@@ -46,13 +47,14 @@ const Input = forwardRef(
 							/>
 						</TouchableOpacity>
 					)}
+					{!!leftText && <Text style={styles.leftText}>{leftText}</Text>}
 					<TextInput
 						placeholder={placeholder}
 						value={text}
 						onChangeText={handleChangeText}
 						onFocus={handleFocus}
 						onBlur={handleBlur}
-						style={styles.inputStyle}
+						style={[styles.inputStyle, leftText && { textAlign: 'right' }]}
 						placeholderTextColor={Colors.midGray}
 						{...otherProps}
 					/>
@@ -104,6 +106,10 @@ const styles = StyleSheet.create({
 		height: 16,
 		marginRight: 8,
 		width: 16,
+	},
+	leftText: {
+		color: Colors.black,
+		fontSize: 15,
 	},
 	underline: isFocused => ({
 		width: '100%',

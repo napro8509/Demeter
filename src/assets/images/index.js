@@ -1,6 +1,7 @@
 const Images = {
 	ic_account: require('./ic_account.png'),
 	ic_add: require('./ic_add.png'),
+	ic_add_image: require('./ic_add_image.png'),
 	ic_apple: require('./ic_apple.png'),
 	ic_back: require('./ic_back.png'),
 	ic_facebook: require('./ic_facebook.png'),

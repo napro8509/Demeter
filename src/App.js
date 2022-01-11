@@ -19,7 +19,9 @@ import { HeaderBackButton, Header } from '@react-navigation/elements';
 import { Colors } from './assets/colors';
 import RegisterSuccess from './screens/RegisterSuccess';
 import MainTab from './screens/MainTab';
+import SelectProject from './screens/SelectProject';
 import CreateProject from './screens/CreateProject';
+import Test from './screens/Test';
 
 const Stack = createNativeStackNavigator();
 
@@ -102,8 +104,22 @@ export default function App() {
 								options={{
 									title: 'Add Project',
 								}}
+								name='SelectProjectScreen'
+								component={SelectProject}
+							/>
+							<Stack.Screen
+								options={{
+									title: 'Create Project',
+								}}
 								name='CreateProjectScreen'
 								component={CreateProject}
+							/>
+							<Stack.Screen
+								options={{
+									title: 'Create Project',
+								}}
+								name='TestScreen'
+								component={Test}
 							/>
 						</Stack.Navigator>
 					</NavigationContainer>
