@@ -21,8 +21,10 @@ import useSelector from '../context/useSelector';
 import useDispatch from '../context/useDispatch';
 import { LOGIN_SUCCESS } from '../context/actions/types';
 import { useStateCallback } from 'react-native-component-kits';
+import useHeader from '../hooks/useHeader';
 
 const LoginAccount = ({ navigation }) => {
+	useHeader(navigation);
 	const [username, setUserName] = useState('123445@gmail.com');
 	const [password, setPassword] = useState('0989222333');
 	const [errorMessage, setErrorMessage] = useStateCallback('');
@@ -57,6 +59,7 @@ const LoginAccount = ({ navigation }) => {
 						accessToken: data?.login?.accessToken,
 					},
 				});
+				navigation.navigate('MainStack');
 			})
 			.catch(err => {
 				console.log(err);

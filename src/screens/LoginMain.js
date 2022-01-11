@@ -1,18 +1,51 @@
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../assets/colors';
 import Images from '../assets/images';
 import Button from '../components/Button';
 import Flex from '../components/Flex';
 import HTMLText from '../components/HTMLText';
 import { LIGHT, PRIMARY } from '../constants';
-
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 const Terms = `By joining Demeter, you agree to our <highlight>Terms of Service</highlight> and <highlight>Privacy Policy</highlight>`;
 
 const LoginMain = ({ navigation }) => {
+	useEffect(() => {
+		StatusBar.setBarStyle('light-content');
+	}, []);
+
 	const handleLoginAccount = () => {
 		navigation.navigate('LoginAccount');
+		StatusBar.setBarStyle('dark-content');
 	};
+
+	const handleRegisterAccount = () => {
+		StatusBar.setBarStyle('dark-content');
+		navigation.navigate('RegisterScreen');
+	};
+
+	async function onAppleButtonPress() {
+		// performs login request
+		try {
+			const appleAuthRequestResponse = await appleAuth.performRequest({
+				requestedOperation: appleAuth.Operation.LOGIN,
+				requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+			});
+
+			// get current authentication state for user
+			// /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+			const credentialState = await appleAuth.getCredentialStateForUser(
+				appleAuthRequestResponse.user
+			);
+
+			// use credentialState response to ensure the user is authenticated
+			if (credentialState === appleAuth.State.AUTHORIZED) {
+				// user is authenticated
+			}
+		} catch (err) {
+			alert(err);
+		}
+	}
 
 	return (
 		<Flex style={styles.container} backgroundColor={Colors.dartBackground}>
@@ -20,7 +53,12 @@ const LoginMain = ({ navigation }) => {
 				<Image source={Images.img_logo} style={styles.logo} />
 			</View>
 			<View style={styles.body}>
-				<Button title='Continue with Apple' type={LIGHT} icon={Images.ic_apple} />
+				<Button
+					title='Continue with Apple'
+					type={LIGHT}
+					icon={Images.ic_apple}
+					onPress={onAppleButtonPress}
+				/>
 				<Button
 					title='Continue with Google'
 					type={LIGHT}
@@ -38,7 +76,12 @@ const LoginMain = ({ navigation }) => {
 					<Text style={styles.or}>Or</Text>
 					<View style={styles.line} />
 				</View>
-				<Button title='Create account' type={PRIMARY} style={styles.button} />
+				<Button
+					title='Create account'
+					type={PRIMARY}
+					style={styles.button}
+					onPress={handleRegisterAccount}
+				/>
 				<HTMLText
 					children={Terms}
 					style={{ div: styles.term }}

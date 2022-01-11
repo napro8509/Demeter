@@ -18,6 +18,8 @@ import DeviceHelper from './utils/DeviceHelper';
 import { HeaderBackButton, Header } from '@react-navigation/elements';
 import { Colors } from './assets/colors';
 import RegisterSuccess from './screens/RegisterSuccess';
+import MainTab from './screens/MainTab';
+import CreateProject from './screens/CreateProject';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,17 +51,26 @@ export default function App() {
 			<GlobalProvider>
 				<View style={styles.container}>
 					<NavigationContainer>
-						<Stack.Navigator initialRouteName='RegisterSuccess'>
+						<Stack.Navigator initialRouteName='LoginMain'>
 							<Stack.Screen
 								name='LoginAccount'
 								component={LoginAccount}
 								options={{
-									headerShown: false,
+									title: '',
+									headerBackTitleVisible: false,
+									headerTransparent: true,
+									// headerBackImageSource: Images.ic_back,
 								}}
 							/>
 							<Stack.Screen name='SmartConfig' component={SmartConfig} />
-							<Stack.Screen name='LoginMain' component={LoginMain} />
-							<Stack.Screen name='Home' component={HomeScreen} />
+							<Stack.Screen
+								name='LoginMain'
+								component={LoginMain}
+								options={{
+									headerShown: false,
+								}}
+							/>
+							<Stack.Screen name='HomeScreen' component={HomeScreen} />
 							<Stack.Screen name='RequestScreen' component={RequestScreen} />
 							<Stack.Screen
 								options={{
@@ -79,6 +90,20 @@ export default function App() {
 								}}
 								name='RegisterSuccess'
 								component={RegisterSuccess}
+							/>
+							<Stack.Screen
+								options={{
+									headerShown: false,
+								}}
+								name='MainStack'
+								component={MainTab}
+							/>
+							<Stack.Screen
+								options={{
+									title: 'Add Project',
+								}}
+								name='CreateProjectScreen'
+								component={CreateProject}
 							/>
 						</Stack.Navigator>
 					</NavigationContainer>

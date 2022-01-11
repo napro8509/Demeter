@@ -17,7 +17,8 @@ const RegisterScreen = ({ navigation }) => {
 	useHeader(navigation);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [phone, setPhone] = useState('0989222333');
+	const [rePassword, setRePassword] = useState('');
+	const [phone, setPhone] = useState('');
 
 	const [errorMessage, setErrorMessage] = useStateCallback('');
 	const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
@@ -25,6 +26,8 @@ const RegisterScreen = ({ navigation }) => {
 	const scrollRef = createRef();
 	const emailRef = createRef();
 	const passwordRef = createRef();
+	const phoneRef = createRef();
+
 	useEffect(() => {
 		Keyboard.addListener('keyboardDidShow', handleScrollEnd);
 		touchableRef.current = emailRef.current;
@@ -42,6 +45,11 @@ const RegisterScreen = ({ navigation }) => {
 			return false;
 		} else if (!CommonUtils.validateEmail(email)) {
 			setErrorMessage('Wrong email address!', () => {
+				openPopover?.();
+			});
+			return false;
+		} else if (password !== rePassword) {
+			setErrorMessage('Password not matched!', () => {
 				openPopover?.();
 			});
 			return false;
@@ -81,10 +89,19 @@ const RegisterScreen = ({ navigation }) => {
 				<View ref={emailRef}>
 					<Input
 						containerStyle={styles.inputStyle}
-						placeholder='Phone number or email address'
+						placeholder='Email address'
 						leftIcon={Images.ic_user}
 						onChangeText={setEmail}
 						defaultValue={email}
+					/>
+				</View>
+				<View ref={phoneRef}>
+					<Input
+						containerStyle={styles.inputStyle}
+						placeholder='Phone number'
+						leftIcon={Images.ic_user}
+						onChangeText={setPhone}
+						defaultValue={phone}
 					/>
 				</View>
 				<View ref={passwordRef}>
@@ -102,8 +119,8 @@ const RegisterScreen = ({ navigation }) => {
 						containerStyle={styles.inputStyle}
 						placeholder='Confirm password'
 						leftIcon={Images.ic_lock}
-						onChangeText={setPassword}
-						defaultValue={password}
+						onChangeText={setRePassword}
+						defaultValue={rePassword}
 						secureTextEntry
 					/>
 				</View>

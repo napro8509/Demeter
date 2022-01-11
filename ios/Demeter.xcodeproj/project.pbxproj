@@ -16,6 +16,7 @@
 		6CA5C03D1CDC77707C8B6457 /* libPods-Demeter-DemeterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCB0C57544C472E42227393 /* libPods-Demeter-DemeterTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9CAD730A85B24A35962E2E2A /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 659361892E6149B294C860C8 /* Roboto-Bold.ttf */; };
+		FA1B9B86278BCE66009D99BD /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA1B9B85278BCE66009D99BD /* AppCenter-Config.plist */; };
 		FAEC1978277DB82F00F8A25D /* Demeter.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = FAEC1977277DB7C100F8A25D /* Demeter.entitlements */; };
 		FD6A5F86489E4EE4865BCC3E /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AF9B29768E84F119978B2EE /* Roboto-Medium.ttf */; };
 /* End PBXBuildFile section */
@@ -40,17 +41,18 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Demeter/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Demeter/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Demeter/main.m; sourceTree = "<group>"; };
-		1EADF7621ED64D5B9EB67334 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		2AF9B29768E84F119978B2EE /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		1EADF7621ED64D5B9EB67334 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		2AF9B29768E84F119978B2EE /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		43525EB69207BB9A7CF2B150 /* libPods-Demeter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demeter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FA07C1182308772501AA95D /* Pods-Demeter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demeter.release.xcconfig"; path = "Target Support Files/Pods-Demeter/Pods-Demeter.release.xcconfig"; sourceTree = "<group>"; };
-		659361892E6149B294C860C8 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		659361892E6149B294C860C8 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Demeter/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BCB0C57544C472E42227393 /* libPods-Demeter-DemeterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demeter-DemeterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CCED9D19749B529F57CBAA /* Pods-Demeter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demeter.debug.xcconfig"; path = "Target Support Files/Pods-Demeter/Pods-Demeter.debug.xcconfig"; sourceTree = "<group>"; };
 		A73A70E1068BA4B1728DF6DD /* Pods-Demeter-DemeterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demeter-DemeterTests.debug.xcconfig"; path = "Target Support Files/Pods-Demeter-DemeterTests/Pods-Demeter-DemeterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F12F67EF1FB9FADF7491BBDB /* Pods-Demeter-DemeterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demeter-DemeterTests.release.xcconfig"; path = "Target Support Files/Pods-Demeter-DemeterTests/Pods-Demeter-DemeterTests.release.xcconfig"; sourceTree = "<group>"; };
+		FA1B9B85278BCE66009D99BD /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		FAEC1977277DB7C100F8A25D /* Demeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Demeter.entitlements; path = Demeter/Demeter.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				FA1B9B85278BCE66009D99BD /* AppCenter-Config.plist */,
 			);
 			name = Demeter;
 			sourceTree = "<group>";
@@ -123,7 +126,6 @@
 				1EADF7621ED64D5B9EB67334 /* Roboto-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		677FDFB658931DCAAF1A1A17 /* Pods */ = {
@@ -266,6 +268,7 @@
 				FAEC1978277DB82F00F8A25D /* Demeter.entitlements in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FA1B9B86278BCE66009D99BD /* AppCenter-Config.plist in Resources */,
 				9CAD730A85B24A35962E2E2A /* Roboto-Bold.ttf in Resources */,
 				FD6A5F86489E4EE4865BCC3E /* Roboto-Medium.ttf in Resources */,
 				2D75ECFC29C84C6290292440 /* Roboto-Regular.ttf in Resources */,

@@ -11,6 +11,9 @@ const RegisterSuccess = ({ navigation }) => {
 
 	const handleLogin = () => {
 		navigation.popToTop();
+		setTimeout(() => {
+			navigation.navigate('LoginAccount');
+		}, 500);
 	};
 
 	return (

@@ -9,4 +9,5 @@ export const Colors = {
 	midGray: 'rgba(150, 150, 150, 1)',
 	transparent: 'transparent',
 	darkGray: 'rgba(123, 123, 123, 1)',
+	gray: 'rgba(195, 195, 195, 1)',
 };
