@@ -28,6 +28,14 @@ const LoginMain = ({ navigation }) => {
 		navigation.navigate('RegisterScreen');
 	};
 
+	const handleLoginSocialSuccess = data => {
+		const { accessToken } = data?.loginSocial || {};
+		if (accessToken) {
+			navigation.navigate('MainStack');
+			StatusBar.setBarStyle('dark-content');
+		}
+	};
+
 	async function onAppleButtonPress() {
 		// performs login request
 		try {
@@ -68,7 +76,7 @@ const LoginMain = ({ navigation }) => {
 				provider: 'google',
 				socialId: userInfo.user.id,
 			})
-				.then(data => console.log(data))
+				.then(handleLoginSocialSuccess)
 				.catch(err => console.log(err));
 		} catch (err) {
 			console.log(err);
@@ -76,7 +84,7 @@ const LoginMain = ({ navigation }) => {
 	};
 
 	const onFacebookButtonPress = () => {
-		LoginManager.logInWithPermissions(['public_profile']).then(
+		LoginManager.logInWithPermissions(['public_profile', 'email']).then(
 			function (result) {
 				if (result.isCancelled) {
 					console.log('Login cancelled');
@@ -88,16 +96,17 @@ const LoginMain = ({ navigation }) => {
 					AccessToken.getCurrentAccessToken().then(data => {
 						console.log(data);
 						Profile.getCurrentProfile().then(function (currentProfile) {
+							console.log('currentProfile', currentProfile);
 							if (currentProfile) {
 								AuthApi.loginSocial({
 									accessToken: data.accessToken,
-									email: currentProfile.emai || '',
+									email: currentProfile.email || '',
 									firstName: currentProfile.firstName,
 									lastName: currentProfile.lastName,
 									provider: 'facebook',
 									socialId: currentProfile.userID,
 								})
-									.then(data => console.log(data))
+									.then(handleLoginSocialSuccess)
 									.catch(err => console.log(err));
 							}
 						});
