@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-
+#import "RNGoogleSignin.h"
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -8,6 +8,7 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h> // <- Add This Import
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -42,7 +43,8 @@ static void InitializeFlipper(UIApplication *application) {
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"Demeter"
                                             initialProperties:nil];
-
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK]; // <- add this
+  
   if (@available(iOS 13.0, *)) {
       rootView.backgroundColor = [UIColor systemBackgroundColor];
   } else {
@@ -63,6 +65,14 @@ static void InitializeFlipper(UIApplication *application) {
       return YES;
     }
   if([RCTLinkingManager application:app openURL:url options:options]) {
+    return YES;
+  }
+  if([RNGoogleSignin application:app openURL:url options:options]) {
+    return YES;
+  }
+  if([[FBSDKApplicationDelegate sharedInstance] application:app
+                                                      openURL:url
+                                                      options:options]) {
     return YES;
   }
     return NO;

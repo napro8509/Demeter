@@ -7,6 +7,10 @@ import Flex from '../components/Flex';
 import HTMLText from '../components/HTMLText';
 import { LIGHT, PRIMARY } from '../constants';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { LoginManager } from 'react-native-fbsdk-next';
+
+GoogleSignin.configure();
 const Terms = `By joining Demeter, you agree to our <highlight>Terms of Service</highlight> and <highlight>Privacy Policy</highlight>`;
 
 const LoginMain = ({ navigation }) => {
@@ -47,6 +51,32 @@ const LoginMain = ({ navigation }) => {
 		}
 	}
 
+	const onGoogleButtonPress = async () => {
+		await GoogleSignin.configure({
+			webClientId: '943234074628-uofrvf4tg1rdk4nj7be8r1d8328g1br0.apps.googleusercontent.com',
+		});
+
+		const userInfo = await GoogleSignin.signIn();
+		console.log(userInfo);
+	};
+
+	const onFacebookButtonPress = () => {
+		LoginManager.logInWithPermissions(['public_profile']).then(
+			function (result) {
+				if (result.isCancelled) {
+					console.log('Login cancelled');
+				} else {
+					console.log(
+						'Login success with permissions: ' + result.grantedPermissions.toString()
+					);
+				}
+			},
+			function (error) {
+				console.log('Login fail with error: ' + error);
+			}
+		);
+	};
+
 	return (
 		<Flex style={styles.container} backgroundColor={Colors.dartBackground}>
 			<View style={styles.logoContainer}>
@@ -64,12 +94,14 @@ const LoginMain = ({ navigation }) => {
 					type={LIGHT}
 					icon={Images.ic_google}
 					style={styles.button}
+					onPress={onGoogleButtonPress}
 				/>
 				<Button
 					title='Continue with Facebook'
 					type={LIGHT}
 					icon={Images.ic_facebook}
 					style={styles.button}
+					onPress={onFacebookButtonPress}
 				/>
 				<View style={styles.separator}>
 					<View style={styles.line} />
