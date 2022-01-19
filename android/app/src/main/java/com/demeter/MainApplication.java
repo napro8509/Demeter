@@ -1,4 +1,7 @@
 package com.demeter;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 
 import android.app.Application;
 import android.content.Context;
@@ -46,6 +49,8 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+      FacebookSdk.sdkInitialize(getApplicationContext());
+      AppEventsLogger.activateApp(this);
   }
 
   /**

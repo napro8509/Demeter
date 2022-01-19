@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "943234074628",
+    "project_id": "demeter-9bcd1",
+    "storage_bucket": "demeter-9bcd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943234074628:android:df4d48d987bc0ef91e0d51",
+        "android_client_info": {
+          "package_name": "com.demeter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943234074628-vr7ub1705hficf7t1sajqs1vcrqn8eqm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.demeter",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "943234074628-bcog17h3tv44jcolsve29qh44vame35k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiWoJbvNC09BO6hS6SmR8-cGLaQrQIYTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943234074628-bcog17h3tv44jcolsve29qh44vame35k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "943234074628-uofrvf4tg1rdk4nj7be8r1d8328g1br0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.foodmap.demeter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
