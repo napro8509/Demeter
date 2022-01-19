@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../assets/colors';
 import Images from '../assets/images';
 import Button from '../components/Button';
@@ -8,9 +8,9 @@ import HTMLText from '../components/HTMLText';
 import { LIGHT, PRIMARY } from '../constants';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { LoginManager } from 'react-native-fbsdk-next';
+import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
+import { AuthApi } from '../services/api';
 
-GoogleSignin.configure();
 const Terms = `By joining Demeter, you agree to our <highlight>Terms of Service</highlight> and <highlight>Privacy Policy</highlight>`;
 
 const LoginMain = ({ navigation }) => {
@@ -52,12 +52,27 @@ const LoginMain = ({ navigation }) => {
 	}
 
 	const onGoogleButtonPress = async () => {
-		await GoogleSignin.configure({
-			webClientId: '943234074628-uofrvf4tg1rdk4nj7be8r1d8328g1br0.apps.googleusercontent.com',
-		});
-
-		const userInfo = await GoogleSignin.signIn();
-		console.log(userInfo);
+		try {
+			await GoogleSignin.configure({
+				webClientId:
+					'943234074628-bcog17h3tv44jcolsve29qh44vame35k.apps.googleusercontent.com',
+			});
+			await GoogleSignin.hasPlayServices();
+			const userInfo = await GoogleSignin.signIn();
+			console.log(userInfo);
+			AuthApi.loginSocial({
+				accessToken: userInfo.idToken,
+				email: userInfo.user.email,
+				firstName: userInfo.user.familyName,
+				lastName: userInfo.user.givenName,
+				provider: 'google',
+				socialId: userInfo.user.id,
+			})
+				.then(data => console.log(data))
+				.catch(err => console.log(err));
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const onFacebookButtonPress = () => {
@@ -69,6 +84,24 @@ const LoginMain = ({ navigation }) => {
 					console.log(
 						'Login success with permissions: ' + result.grantedPermissions.toString()
 					);
+					console.log(result);
+					AccessToken.getCurrentAccessToken().then(data => {
+						console.log(data);
+						Profile.getCurrentProfile().then(function (currentProfile) {
+							if (currentProfile) {
+								AuthApi.loginSocial({
+									accessToken: data.accessToken,
+									email: currentProfile.emai || '',
+									firstName: currentProfile.firstName,
+									lastName: currentProfile.lastName,
+									provider: 'facebook',
+									socialId: currentProfile.userID,
+								})
+									.then(data => console.log(data))
+									.catch(err => console.log(err));
+							}
+						});
+					});
 				}
 			},
 			function (error) {
@@ -77,18 +110,22 @@ const LoginMain = ({ navigation }) => {
 		);
 	};
 
+	const isIOS = Platform.OS === 'ios';
+
 	return (
 		<Flex style={styles.container} backgroundColor={Colors.dartBackground}>
 			<View style={styles.logoContainer}>
 				<Image source={Images.img_logo} style={styles.logo} />
 			</View>
 			<View style={styles.body}>
-				<Button
-					title='Continue with Apple'
-					type={LIGHT}
-					icon={Images.ic_apple}
-					onPress={onAppleButtonPress}
-				/>
+				{isIOS && (
+					<Button
+						title='Continue with Apple'
+						type={LIGHT}
+						icon={Images.ic_apple}
+						onPress={onAppleButtonPress}
+					/>
+				)}
 				<Button
 					title='Continue with Google'
 					type={LIGHT}

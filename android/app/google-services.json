@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "943234074628-4kdo0k043g6o06l4k5mddup6pu4r0nb3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.demeter",
+            "certificate_hash": "46db051eacd998d4c5ff7faee8415b0da7cceec4"
+          }
+        },
+        {
           "client_id": "943234074628-vr7ub1705hficf7t1sajqs1vcrqn8eqm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -42,7 +42,37 @@ const register = ({ email = 'abc@gmail.com', password, phone = '0989333222' }) =
 	};
 	return post({ params: postData, showLoading: true }).then(({ data }) => data);
 };
+
+const loginSocial = ({ accessToken, email, firstName, lastName, provider, socialId }) => {
+	const postData = {
+		query: `
+			mutation input(
+				$accessToken: String!
+				$email: String!
+				$firstName: String!
+				$lastName: String!
+				$socialId: String!
+			)
+			{
+				loginSocial(input:{accessToken: $accessToken, email: $email, firstName: $firstName, lastName: $lastName, provider: ${provider}, socialId: $socialId}) {
+					accessToken
+				}
+			}
+		`,
+		variables: {
+			accessToken,
+			email,
+			firstName,
+			lastName,
+			provider,
+			socialId,
+		},
+	};
+	return post({ params: postData, showLoading: true }).then(({ data }) => data);
+};
+
 export default {
 	login,
 	register,
+	loginSocial,
 };
