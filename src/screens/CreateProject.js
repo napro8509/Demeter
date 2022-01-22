@@ -6,14 +6,19 @@ import Flex from '../components/Flex';
 import Input from '../components/Input';
 import useHeader from '../hooks/useHeader';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { useState } from 'react';
 const CreateProject = ({ navigation }) => {
+	const [imageSource, setImageSource] = useState(undefined);
+
 	useHeader(navigation);
 
 	const handleSelectImage = async () => {
 		const result = await launchImageLibrary({
 			mediaType: 'photo',
 		});
-		console.log(result);
+		if (result?.assets?.[0]?.uri) {
+			setImageSource({ uri: result?.assets?.[0]?.uri });
+		}
 	};
 
 	const handleCreateProject = () => {};
@@ -21,7 +26,7 @@ const CreateProject = ({ navigation }) => {
 		<Flex style={styles.container} keyboardAvoidView>
 			<ScrollView style={styles.wrapper}>
 				<TouchableOpacity style={styles.button} onPress={handleSelectImage}>
-					<Image source={Images.ic_add_image} style={styles.addButton} />
+					<Image source={imageSource || Images.ic_add_image} style={styles.addButton} />
 				</TouchableOpacity>
 				<Input leftText='Project Name' containerStyle={styles.input} />
 				<Input leftText='Location' containerStyle={styles.input} />
@@ -36,6 +41,7 @@ export default CreateProject;
 
 const styles = StyleSheet.create({
 	addButton: {
+		borderRadius: 5,
 		height: 80,
 		width: 80,
 	},

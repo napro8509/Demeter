@@ -31,7 +31,7 @@ const LoginMain = ({ navigation }) => {
 	const handleLoginSocialSuccess = data => {
 		const { accessToken } = data?.loginSocial || {};
 		if (accessToken) {
-			navigation.navigate('MainStack');
+			navigation.navigate('MainTab');
 			StatusBar.setBarStyle('dark-content');
 		}
 	};

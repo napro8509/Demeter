@@ -2,17 +2,27 @@ import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../assets/colors';
 import Images from '../assets/images';
+import AppNavigator from '../navigation/AppNavigator';
+import SwitchProject from '../popup/SwitchProject';
 
 const HomeScreen = ({ navigation }) => {
 	const handleAddProject = () => {
 		navigation.navigate('SelectProjectScreen');
 	};
 
+	const handleSwitchProject = () => {
+		AppNavigator.showBottom({
+			screen: SwitchProject,
+		});
+	};
+
 	return (
 		<SafeAreaView style={styles.flex}>
 			<View style={styles.container}>
 				<View style={styles.header}>
-					<Text style={styles.projectName}>Empty Project</Text>
+					<TouchableOpacity onPress={handleSwitchProject}>
+						<Text style={styles.projectName}>Empty Project</Text>
+					</TouchableOpacity>
 					<View style={styles.headerRight}>
 						<TouchableOpacity onPress={handleAddProject}>
 							<Image source={Images.ic_add} style={styles.icon} />

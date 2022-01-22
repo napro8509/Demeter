@@ -25,8 +25,8 @@ import useHeader from '../hooks/useHeader';
 
 const LoginAccount = ({ navigation }) => {
 	useHeader(navigation);
-	const [username, setUserName] = useState('');
-	const [password, setPassword] = useState('');
+	const [username, setUserName] = useState('123445@gmail.com');
+	const [password, setPassword] = useState('0989222333');
 	const [errorMessage, setErrorMessage] = useStateCallback('');
 	const { openPopover, closePopover, popoverVisible, touchableRef, popoverAnchorRect } =
 		usePopover();
@@ -59,7 +59,7 @@ const LoginAccount = ({ navigation }) => {
 						accessToken: data?.login?.accessToken,
 					},
 				});
-				navigation.navigate('MainStack');
+				navigation.navigate('MainTab');
 			})
 			.catch(err => {
 				console.log(err);

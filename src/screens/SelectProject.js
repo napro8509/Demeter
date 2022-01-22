@@ -11,22 +11,27 @@ const data = [
 	{
 		icon: Images.ic_project_agircuture,
 		name: 'Agriculture',
+		type: 'agriculture',
 	},
 	{
 		icon: Images.ic_project_smarthome,
 		name: 'Smart home',
+		type: 'smartHome',
 	},
 	{
 		icon: Images.ic_project_education,
 		name: 'Education',
+		type: 'education',
 	},
 	{
 		icon: Images.ic_project_medical,
 		name: 'Medical',
+		type: 'medical',
 	},
 	{
 		icon: Images.ic_project_industrial,
 		name: 'Industrial',
+		type: 'industrial',
 	},
 	{
 		icon: Images.ic_project_weatherstation,
@@ -39,6 +44,7 @@ const data = [
 	{
 		icon: Images.ic_project_other,
 		name: 'Others',
+		type: 'others',
 	},
 ];
 
@@ -53,11 +59,13 @@ const SelectProject = ({ navigation }) => {
 	};
 
 	const handleCreateProject = () => {
-		navigation.navigate('CreateProjectScreen');
+		navigation.navigate('CreateProjectScreen', {
+			selectedType,
+		});
 	};
 
 	const renderItem = ({ item, index }) => (
-		<View style={{ flex: 1 / 3, alignItems: 'center' }}>
+		<View style={styles.itemContainer}>
 			<TouchableOpacity
 				style={styles.projectItem(item?.name === selectedType?.name)}
 				onPress={() => handleSelectProject(item)}
@@ -106,20 +114,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 20,
 	},
-	content: {
-		flex: 1,
-	},
-	flex: {
-		alignItems: 'center',
-		backgroundColor: 'red',
-		justifyContent: 'center',
-		width: (DeviceHelper.screenWidth - 80) / 3,
-	},
 	iconProject: isSelected => ({
 		height: 50,
 		width: 50,
 		tintColor: isSelected ? Colors.green : Colors.midGray,
 	}),
+	itemContainer: {
+		alignItems: 'center',
+		flex: 1 / 3,
+	},
 	projectItem: isSelected => ({
 		alignItems: 'center',
 		borderColor: isSelected ? Colors.green : 'rgba(224, 224, 224, 1)',

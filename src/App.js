@@ -4,7 +4,6 @@ import { NativeBaseProvider, View } from 'native-base';
 import React, { useEffect } from 'react';
 import { Platform, StatusBar, StyleSheet, Text } from 'react-native';
 import { Fonts } from './assets/fonts';
-import Images from './assets/images';
 import Loading from './components/Loading';
 import { GlobalProvider } from './context/Provider';
 import AppNavigator from './navigation/AppNavigator';
@@ -15,15 +14,86 @@ import RegisterScreen from './screens/RegisterScreen';
 import RequestScreen from './screens/RequestScreen';
 import SmartConfig from './screens/SmartConfig';
 import DeviceHelper from './utils/DeviceHelper';
-import { HeaderBackButton, Header } from '@react-navigation/elements';
-import { Colors } from './assets/colors';
 import RegisterSuccess from './screens/RegisterSuccess';
 import MainTab from './screens/MainTab';
 import SelectProject from './screens/SelectProject';
 import CreateProject from './screens/CreateProject';
 import Test from './screens/Test';
+import DialogScreen from './popup/DialogScreen';
 
 const Stack = createNativeStackNavigator();
+
+const MainStack = createNativeStackNavigator();
+
+const MainStackNavigator = () => (
+	<MainStack.Navigator initialRouteName='LoginMain'>
+		<MainStack.Screen
+			name='LoginAccount'
+			component={LoginAccount}
+			options={{
+				title: '',
+				headerBackTitleVisible: false,
+				headerTransparent: true,
+			}}
+		/>
+		<MainStack.Screen name='SmartConfig' component={SmartConfig} />
+		<MainStack.Screen
+			name='LoginMain'
+			component={LoginMain}
+			options={{
+				headerShown: false,
+			}}
+		/>
+		<MainStack.Screen name='HomeScreen' component={HomeScreen} />
+		<MainStack.Screen name='RequestScreen' component={RequestScreen} />
+		<MainStack.Screen
+			options={{
+				title: '',
+				headerBackTitleVisible: false,
+				headerTransparent: true,
+			}}
+			name='RegisterScreen'
+			component={RegisterScreen}
+		/>
+		<MainStack.Screen
+			options={{
+				title: '',
+				headerBackTitleVisible: false,
+				headerTransparent: true,
+			}}
+			name='RegisterSuccess'
+			component={RegisterSuccess}
+		/>
+		<MainStack.Screen
+			options={{
+				headerShown: false,
+			}}
+			name='MainTab'
+			component={MainTab}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Add Project',
+			}}
+			name='SelectProjectScreen'
+			component={SelectProject}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Create Project',
+			}}
+			name='CreateProjectScreen'
+			component={CreateProject}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Create Project',
+			}}
+			name='TestScreen'
+			component={Test}
+		/>
+	</MainStack.Navigator>
+);
 
 export default function App() {
 	useEffect(() => {
@@ -52,75 +122,40 @@ export default function App() {
 		<NativeBaseProvider>
 			<GlobalProvider>
 				<View style={styles.container}>
-					<NavigationContainer>
-						<Stack.Navigator initialRouteName='LoginMain'>
-							<Stack.Screen
-								name='LoginAccount'
-								component={LoginAccount}
-								options={{
-									title: '',
-									headerBackTitleVisible: false,
-									headerTransparent: true,
-									// headerBackImageSource: Images.ic_back,
+					<NavigationContainer ref={AppNavigator.setRootNavigator}>
+						<Stack.Navigator
+							screenOptions={{
+								// cardStyle: { backgroundColor: 'transparent' },
+								// cardOverlayEnabled: true,
+								// cardStyleInterpolator: ({ current: { progress } }) => ({
+								// 	cardStyle: {
+								// 		opacity: progress.interpolate({
+								// 			inputRange: [0, 0.5, 0.9, 1],
+								// 			outputRange: [0, 0.25, 0.7, 1],
+								// 		}),
+								// 	},
+								// 	overlayStyle: {
+								// 		opacity: progress.interpolate({
+								// 			inputRange: [0, 1],
+								// 			outputRange: [0, 0],
+								// 			extrapolate: 'clamp',
+								// 		}),
+								// 	},
+								// }),
+								headerShown: false,
+							}}
+						>
+							<Stack.Group>
+								<Stack.Screen name='MainStack' component={MainStackNavigator} />
+							</Stack.Group>
+							<Stack.Group
+								screenOptions={{
+									presentation: 'transparentModal',
+									animation: 'fade',
 								}}
-							/>
-							<Stack.Screen name='SmartConfig' component={SmartConfig} />
-							<Stack.Screen
-								name='LoginMain'
-								component={LoginMain}
-								options={{
-									headerShown: false,
-								}}
-							/>
-							<Stack.Screen name='HomeScreen' component={HomeScreen} />
-							<Stack.Screen name='RequestScreen' component={RequestScreen} />
-							<Stack.Screen
-								options={{
-									title: '',
-									headerBackTitleVisible: false,
-									headerTransparent: true,
-									// headerBackImageSource: Images.ic_back,
-								}}
-								name='RegisterScreen'
-								component={RegisterScreen}
-							/>
-							<Stack.Screen
-								options={{
-									title: '',
-									headerBackTitleVisible: false,
-									headerTransparent: true,
-								}}
-								name='RegisterSuccess'
-								component={RegisterSuccess}
-							/>
-							<Stack.Screen
-								options={{
-									headerShown: false,
-								}}
-								name='MainStack'
-								component={MainTab}
-							/>
-							<Stack.Screen
-								options={{
-									title: 'Add Project',
-								}}
-								name='SelectProjectScreen'
-								component={SelectProject}
-							/>
-							<Stack.Screen
-								options={{
-									title: 'Create Project',
-								}}
-								name='CreateProjectScreen'
-								component={CreateProject}
-							/>
-							<Stack.Screen
-								options={{
-									title: 'Create Project',
-								}}
-								name='TestScreen'
-								component={Test}
-							/>
+							>
+								<Stack.Screen name='Dialog' component={DialogScreen} />
+							</Stack.Group>
 						</Stack.Navigator>
 					</NavigationContainer>
 					<Loading ref={AppNavigator.setLoadingRef} />
