@@ -1,4 +1,4 @@
-export const Colors = {
+const Colors = {
 	dartBackground: 'black',
 	white: 'white',
 	lightGray: 'rgba(224, 224, 224, 1)',
@@ -11,3 +11,5 @@ export const Colors = {
 	darkGray: 'rgba(123, 123, 123, 1)',
 	gray: 'rgba(195, 195, 195, 1)',
 };
+
+export default Colors;

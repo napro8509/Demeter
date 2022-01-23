@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 import Images from '../assets/images';
 import { Button } from '../components';
 import { DISABLED, PRIMARY } from '../constants';

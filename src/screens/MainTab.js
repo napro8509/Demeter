@@ -6,7 +6,7 @@ import StoreScreen from './StoreScreen';
 import NotificationScreen from './NotificationScreen';
 import UserScreen from './UserScreen';
 import Images from '../assets/images';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 const Tab = createBottomTabNavigator();
 
 const MainTab = () => {

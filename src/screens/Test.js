@@ -19,7 +19,7 @@ import {
 	useColorScheme,
 } from 'react-native';
 import WifiManager from 'react-native-wifi-reborn';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Colors  from 'react-native/Libraries/NewAppScreen';
 
 const Section = ({ children, title, isSelected, onSelectWifi }) => {
 	const isDarkMode = useColorScheme() === 'dark';

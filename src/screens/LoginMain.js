@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Image, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 import Images from '../assets/images';
 import Button from '../components/Button';
 import Flex from '../components/Flex';

@@ -1,6 +1,6 @@
 import { HeaderBackButton } from '@react-navigation/elements';
 import { useLayoutEffect } from 'react';
-import { Colors } from '../assets/colors';
+import Colors from '../assets/colors';
 import React, { Component } from 'react';
 
 function useHeader(navigation) {

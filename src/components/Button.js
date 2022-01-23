@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 import { DISABLED, LIGHT, OUTLINE } from '../constants';
 
 const Button = ({ title, onPress, disabled, style, type, titleStyle, icon, iconStyle }) => (

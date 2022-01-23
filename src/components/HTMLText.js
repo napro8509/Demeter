@@ -2,7 +2,7 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import HTMLView from 'react-native-htmlview';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 
 const HTMLText = ({ children, style, containerStyle }) => (
 	<View style={containerStyle}>

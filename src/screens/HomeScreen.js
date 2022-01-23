@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors from '../assets/colors';
 import Images from '../assets/images';
 import AppNavigator from '../navigation/AppNavigator';
 import SwitchProject from '../popup/SwitchProject';

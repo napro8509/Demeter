@@ -11,7 +11,7 @@ import {
 	View,
 } from 'react-native';
 import Popover, { usePopover } from 'react-native-modal-popover';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 import Images from '../assets/images';
 import { Button } from '../components';
 import Flex from '../components/Flex';

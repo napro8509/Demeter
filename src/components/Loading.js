@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { View, StyleSheet, BackHandler, ActivityIndicator } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors from '../assets/colors';
 
 const styleCenter = {
 	...StyleSheet.absoluteFillObject,

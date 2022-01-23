@@ -1,7 +1,7 @@
 import { Flex } from 'native-base';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors  from '../assets/colors';
 import Images from '../assets/images';
 import { Button } from '../components';
 import useHeader from '../hooks/useHeader';

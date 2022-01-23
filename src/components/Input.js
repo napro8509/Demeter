@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { forwardRef } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors from '../assets/colors';
 
 const Input = forwardRef(
 	(

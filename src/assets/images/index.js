@@ -10,6 +10,7 @@ const Images = {
 	ic_lock: require('./ic_lock.png'),
 	ic_map: require('./ic_map.png'),
 	ic_more: require('./ic_more.png'),
+	ic_more_options: require('./ic_more_options.png'),
 	ic_notification: require('./ic_notification.png'),
 	ic_project_agircuture: require('./ic_project_agircuture.png'),
 	ic_project_education: require('./ic_project_education.png'),
@@ -20,6 +21,7 @@ const Images = {
 	ic_project_smarthome: require('./ic_project_smarthome.png'),
 	ic_project_weatherstation: require('./ic_project_weatherstation.png'),
 	ic_store: require('./ic_store.png'),
+	ic_tomato: require('./ic_tomato.png'),
 	ic_user: require('./ic_user.png'),
 	img_logo: require('./img_logo.png'),
 };

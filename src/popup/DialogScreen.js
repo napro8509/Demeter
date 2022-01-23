@@ -7,7 +7,7 @@ import {
 	TouchableWithoutFeedback,
 	View,
 } from 'react-native';
-import { Colors } from '../assets/colors';
+import Colors from '../assets/colors';
 import DeviceHelper from '../utils/DeviceHelper';
 
 const DialogScreen = ({ navigation, route }) => {
