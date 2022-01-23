@@ -5,8 +5,9 @@ import { Button } from '../components';
 import Flex from '../components/Flex';
 import Input from '../components/Input';
 import useHeader from '../hooks/useHeader';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { useState } from 'react';
+import Colors from '../assets/colors';
 const CreateProject = ({ navigation }) => {
 	const [imageSource, setImageSource] = useState(undefined);
 
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
+		backgroundColor: Colors.white,
 	},
 	input: {
 		marginHorizontal: 20,

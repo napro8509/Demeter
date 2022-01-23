@@ -20,6 +20,12 @@ import SelectProject from './screens/SelectProject';
 import CreateProject from './screens/CreateProject';
 import Test from './screens/Test';
 import DialogScreen from './popup/DialogScreen';
+import ManageProjects from './screens/ManageProjects';
+import ProjectDetail from './screens/ProjectDetail';
+import ManageZones from './screens/ManageZones';
+import ZoneDetail from './screens/ZoneDetail';
+import ProjectDevices from './screens/ProjectDevices';
+import AddProjectDevice from './screens/AddProjectDevice';
 
 const Stack = createNativeStackNavigator();
 
@@ -92,6 +98,48 @@ const MainStackNavigator = () => (
 			name='TestScreen'
 			component={Test}
 		/>
+		<MainStack.Screen
+			options={{
+				title: 'Manage Projects',
+			}}
+			name='ManageProjects'
+			component={ManageProjects}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Project Info',
+			}}
+			name='ProjectDetailScreen'
+			component={ProjectDetail}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Manage Zones',
+			}}
+			name='ManageZones'
+			component={ManageZones}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Zone Detail',
+			}}
+			name='ZoneDetailScreen'
+			component={ZoneDetail}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Project Devices',
+			}}
+			name='ProjectDevices'
+			component={ProjectDevices}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Add Project Device',
+			}}
+			name='AddProjectDevice'
+			component={AddProjectDevice}
+		/>
 	</MainStack.Navigator>
 );
 
@@ -125,23 +173,6 @@ export default function App() {
 					<NavigationContainer ref={AppNavigator.setRootNavigator}>
 						<Stack.Navigator
 							screenOptions={{
-								// cardStyle: { backgroundColor: 'transparent' },
-								// cardOverlayEnabled: true,
-								// cardStyleInterpolator: ({ current: { progress } }) => ({
-								// 	cardStyle: {
-								// 		opacity: progress.interpolate({
-								// 			inputRange: [0, 0.5, 0.9, 1],
-								// 			outputRange: [0, 0.25, 0.7, 1],
-								// 		}),
-								// 	},
-								// 	overlayStyle: {
-								// 		opacity: progress.interpolate({
-								// 			inputRange: [0, 1],
-								// 			outputRange: [0, 0],
-								// 			extrapolate: 'clamp',
-								// 		}),
-								// 	},
-								// }),
 								headerShown: false,
 							}}
 						>

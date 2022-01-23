@@ -10,6 +10,8 @@ const Colors = {
 	transparent: 'transparent',
 	darkGray: 'rgba(123, 123, 123, 1)',
 	gray: 'rgba(195, 195, 195, 1)',
+	border: 'rgba(224, 224, 224, 1)',
+	veryLightGreen: 'rgba(229, 244, 236, 1)'
 };
 
 export default Colors;

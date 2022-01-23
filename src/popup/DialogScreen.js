@@ -25,11 +25,10 @@ const DialogScreen = ({ navigation, route }) => {
 		}
 	};
 
-	const handleRequestClose = callback => {
+	const handleRequestClose = () => {
 		hideAnimated(() => {
 			if (navigation?.canGoBack?.()) {
 				navigation?.goBack?.();
-				callback?.();
 			}
 		});
 	};

@@ -19,5 +19,6 @@ module.exports = {
 				tabWidth: 4,
 			},
 		],
+		'react-native/sort-styles': 'off',
 	},
 };
