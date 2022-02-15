@@ -518,7 +518,7 @@
 				CODE_SIGN_ENTITLEMENTS = Demeter/Demeter.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = R4Q4C6797A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Demeter/Info.plist;
@@ -549,7 +549,7 @@
 				CODE_SIGN_ENTITLEMENTS = Demeter/Demeter.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = R4Q4C6797A;
 				INFOPLIST_FILE = Demeter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
