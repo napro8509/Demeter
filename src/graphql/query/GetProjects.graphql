@@ -1,0 +1,32 @@
+query getProjects {
+	projects {
+		area
+		creatorId
+		endDate
+		id
+		latitude
+		location
+		longitude
+		name
+		projectType
+		startDate
+		groups {
+			area
+			creatorId
+			endDate
+			id
+			location
+			name
+			projectId
+			startDate
+			type
+			devices {
+				deviceProfileId
+				deviceSerial
+				id
+				keyAndCerts
+				token
+			}
+		}
+	}
+}

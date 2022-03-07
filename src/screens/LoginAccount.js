@@ -11,7 +11,7 @@ import {
 	View,
 } from 'react-native';
 import Popover, { usePopover } from 'react-native-modal-popover';
-import Colors  from '../assets/colors';
+import Colors from '../assets/colors';
 import Images from '../assets/images';
 import { Button } from '../components';
 import Flex from '../components/Flex';
@@ -22,6 +22,8 @@ import useDispatch from '../context/useDispatch';
 import { LOGIN_SUCCESS } from '../context/actions/types';
 import { useStateCallback } from 'react-native-component-kits';
 import useHeader from '../hooks/useHeader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ASYNC_AUTH_TOKEN } from '../constants';
 
 const LoginAccount = ({ navigation }) => {
 	useHeader(navigation);
@@ -53,13 +55,16 @@ const LoginAccount = ({ navigation }) => {
 		touchableRef.current = passWordRef.current;
 		AuthApi.login(username, password)
 			.then(data => {
-				dispatch({
-					type: LOGIN_SUCCESS,
-					payload: {
-						accessToken: data?.login?.accessToken,
-					},
-				});
-				navigation.navigate('MainTab');
+				if (data?.login?.accessToken) {
+					dispatch({
+						type: LOGIN_SUCCESS,
+						payload: {
+							accessToken: data?.login?.accessToken,
+						},
+					});
+					AsyncStorage.setItem(ASYNC_AUTH_TOKEN, data?.login?.accessToken);
+					navigation.navigate('MainTab');
+				}
 			})
 			.catch(err => {
 				console.log(err);

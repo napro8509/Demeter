@@ -27,7 +27,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const getToken = async () => {
 	const token = await AsyncStorage.getItem(Constants.ASYNC_AUTH_TOKEN);
-	return JSON.parse(token);
+	return token;
 };
 
 const auth = setContext(async (operation, forward) => {

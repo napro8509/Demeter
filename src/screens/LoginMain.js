@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { Image, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors  from '../assets/colors';
+import Colors from '../assets/colors';
 import Images from '../assets/images';
 import Button from '../components/Button';
 import Flex from '../components/Flex';
 import HTMLText from '../components/HTMLText';
-import { LIGHT, PRIMARY } from '../constants';
+import { ASYNC_AUTH_TOKEN, LIGHT, PRIMARY } from '../constants';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next';
 import { AuthApi } from '../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Terms = `By joining Demeter, you agree to our <highlight>Terms of Service</highlight> and <highlight>Privacy Policy</highlight>`;
 
@@ -32,6 +33,7 @@ const LoginMain = ({ navigation }) => {
 		const { accessToken } = data?.loginSocial || {};
 		if (accessToken) {
 			navigation.navigate('MainTab');
+			AsyncStorage.setItem(ASYNC_AUTH_TOKEN, data?.login?.accessToken);
 			StatusBar.setBarStyle('dark-content');
 		}
 	};

@@ -1,3 +1,3 @@
 import Button from './Button';
-
-export { Button };
+import Flex from './Flex';
+export { Button, Flex };

@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		/* Experimental Options */
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"jsx": "react-native",
+		"lib": ["es6"],
+		"moduleResolution": "node",
+		"noEmit": true,
+		"strict": true,
+		"target": "esnext",
+		"noImplicitAny": false,
+		"baseUrl": "./src",
+		"paths": {
+			"@assets": ["assets"],
+			"@components": ["components"],
+			"@utils": ["utils"],
+			"@components/*": ["components/*"],
+			"@hooks": ["hooks"]
+		}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"]
+}

@@ -1,3 +1,5 @@
+import { Colors } from '@assets';
+import { Flex } from 'native-base';
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import RNEsptouch from 'react-native-esptouch';
@@ -42,12 +44,17 @@ const SmartConfig = () => {
 	};
 
 	return (
-		<View>
+		<Flex style={styles.container}>
 			<Button title='ESPTouch Start' onPress={handleStart} />
-		</View>
+		</Flex>
 	);
 };
 
 export default SmartConfig;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: Colors.white,
+	},
+});

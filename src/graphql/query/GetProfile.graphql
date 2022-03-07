@@ -1,0 +1,21 @@
+query getProfile {
+	getProfile {
+		email
+		id
+		password
+		phone
+		role
+		projects {
+			area
+			creatorId
+			endDate
+			id
+			latitude
+			location
+			longitude
+			name
+			projectType
+			startDate
+		}
+	}
+}

@@ -11,7 +11,8 @@ const HomeScreen = ({ navigation }) => {
 	const [activeTab, setActiveTab] = useState(0);
 
 	const handleAddProject = () => {
-		navigation.navigate('SelectProjectScreen');
+		// navigation.navigate('SelectProjectScreen');
+		navigation.navigate('AddDevice');
 	};
 
 	const handleSwitchProject = () => {

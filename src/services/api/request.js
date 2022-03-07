@@ -32,7 +32,7 @@ const getServerErrorMessage = resp => {
 	if (resp.error && typeof resp.error === 'string') {
 		return { code: status, errorMessage: resp.error };
 	}
-	const errors = resp?.errors || resp?.data?.errors || {}
+	const errors = resp?.errors || resp?.data?.errors || {};
 	if (errors) {
 		let errorMessage = '';
 		let paramName = '';
@@ -95,7 +95,7 @@ async function request({ params, method, headers, url, ...otherParams }) {
 		const resp = await axios(options);
 		// HTTP response
 		const { status, statusText, headers } = resp;
-		console.log('resp: ', resp);
+		// console.log('resp: ', resp);
 		if (status !== ErrorCode.HttpSuccess) {
 			return Promise.reject({
 				code: status,

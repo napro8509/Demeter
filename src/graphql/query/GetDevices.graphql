@@ -1,0 +1,9 @@
+query getDevices {
+	devices {
+		deviceProfileId
+		deviceSerial
+		id
+		keyAndCerts
+		token
+	}
+}

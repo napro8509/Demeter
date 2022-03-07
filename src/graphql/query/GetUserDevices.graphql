@@ -1,0 +1,11 @@
+query getUserDevices {
+	userDevices {
+		deviceId
+		deviceProfileId
+		groupId
+		name
+		id
+		projectId
+		userId
+	}
+}

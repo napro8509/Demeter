@@ -1,0 +1,13 @@
+query getGroups {
+	groups {
+		area
+		creatorId
+		endDate
+		id
+		location
+		name
+		projectId
+		startDate
+		type
+	}
+}

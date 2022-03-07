@@ -1,0 +1,9 @@
+overwrite: true
+schema: "https://stag-api.demeter.vn/graphql"
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/graphql/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"

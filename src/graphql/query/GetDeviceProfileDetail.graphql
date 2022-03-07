@@ -1,0 +1,8 @@
+query getDeviceProfileDetail {
+	deviceProfile(id: "") {
+		categoryIds
+		description
+		id
+		name
+	}
+}
