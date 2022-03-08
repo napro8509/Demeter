@@ -4,6 +4,8 @@ import Flex from '@components/Flex';
 import { Colors } from '@assets';
 import useHeader from '@hooks/useHeader';
 import WifiManager from 'react-native-wifi-reborn';
+import ConnectWifiPopup from '../popup/ConnectWifiPopup';
+import { AppNavigator } from '@navigation';
 
 const ConnectWifi = ({ navigation }) => {
 	useHeader(navigation);
@@ -18,8 +20,18 @@ const ConnectWifi = ({ navigation }) => {
 
 	const handleRetry = () => {};
 
+	const handleInputPassword = () => {
+		navigation.navigate('RegisterDevice');
+	};
+
 	const handleSmartConfig = () => {
-		navigation.navigate('SmartConfig');
+		AppNavigator.showBottom({
+			screen: ConnectWifiPopup,
+			closeOnTouchOutside: true,
+			params: {
+				onInputPassword: handleInputPassword,
+			},
+		});
 	};
 
 	return (

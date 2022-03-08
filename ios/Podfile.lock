@@ -317,8 +317,6 @@ PODS:
   - react-native-branch (5.2.1):
     - Branch (= 1.40.2)
     - React
-  - react-native-esptouch (1.1.5):
-    - React
   - react-native-fbsdk-next (6.2.0):
     - React-Core
     - react-native-fbsdk-next/Core (= 6.2.0)
@@ -337,6 +335,8 @@ PODS:
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
+  - react-native-smartconfig-quan (1.0.7):
+    - React
   - React-perflogger (0.66.4)
   - React-RCTActionSheet (0.66.4):
     - React-Core/RCTActionSheetHeaders (= 0.66.4)
@@ -465,10 +465,10 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-branch (from `../node_modules/react-native-branch`)
-  - react-native-esptouch (from `../node_modules/react-native-esptouch`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-smartconfig-quan (from `../node_modules/react-native-smartconfig-quan`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -561,14 +561,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-branch:
     :path: "../node_modules/react-native-branch"
-  react-native-esptouch:
-    :path: "../node_modules/react-native-esptouch"
   react-native-fbsdk-next:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-smartconfig-quan:
+    :path: "../node_modules/react-native-smartconfig-quan"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -655,10 +655,10 @@ SPEC CHECKSUMS:
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
   react-native-branch: 945ca24fedc997212727b60b1770da41722dc643
-  react-native-esptouch: c254067d77f5d8f3a8729dcb60686959b1859b9e
   react-native-fbsdk-next: 3a9545d174f16ec343e7bcaf12f970fdc82feed2
   react-native-image-picker: 4b090b73077c3a71b91fddc739a594feebd00184
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-smartconfig-quan: e49981c32759e1b4bdd8d7a93f28dc888349c3bc
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
   React-RCTAnimation: 743e88b55ac62511ae5c2e22803d4f503f2a3a13
@@ -680,6 +680,6 @@ SPEC CHECKSUMS:
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: e087f47c5ad04cc6fa4b01d9dc5848706287954f
+PODFILE CHECKSUM: 19e401f9e76e0be75995fab8fa6af3491ff2ebf5
 
 COCOAPODS: 1.11.2

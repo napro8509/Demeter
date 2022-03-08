@@ -12,8 +12,6 @@ target 'Demeter' do
     :hermes_enabled => false
   )
 
-  pod 'react-native-esptouch', :path => '../node_modules/react-native-esptouch'
-
   target 'DemeterTests' do
     inherit! :complete
     # Pods for testing

@@ -19,7 +19,9 @@
 			"@components": ["components"],
 			"@utils": ["utils"],
 			"@components/*": ["components/*"],
-			"@hooks": ["hooks"]
+			"@hooks": ["hooks"],
+			"@navigation": ["navigation"],
+			"@constants": ["constants"]
 		}
 	},
 	"include": ["src"],

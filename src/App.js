@@ -30,6 +30,7 @@ import SplashScreen from './screens/SplashScreen';
 import withApollo from './graphql';
 import AddDevice from './screens/AddDevice';
 import ConnectWifi from './screens/ConnectWifi';
+import RegisterDevice from './screens/RegisterDevice';
 
 const Stack = createNativeStackNavigator();
 
@@ -164,6 +165,13 @@ const MainStackNavigator = () => (
 			}}
 			name='ConnectWifi'
 			component={ConnectWifi}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Register Device',
+			}}
+			name='RegisterDevice'
+			component={RegisterDevice}
 		/>
 	</MainStack.Navigator>
 );
