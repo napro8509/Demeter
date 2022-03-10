@@ -6,7 +6,7 @@ const getInfo = () =>
 		headers: {},
 	})
 		.then(data => {
-			alert(JSON.stringify(data))
+			alert(JSON.stringify(data));
 			return data.json();
 		})
 		.then(data => {
@@ -54,9 +54,35 @@ const connectAp = () =>
 		.then(data => alert(JSON.stringify(data)))
 		.catch(err => alert(JSON.stringify(err)));
 
+const sendDeviceId = ({ ip, deviceId }) =>
+	post({
+		url: `${ip}/params`,
+		params: {
+			deviceId,
+		},
+	});
+
+const sendEndpoint = ({ ip, endpoint }) =>
+	post({
+		url: `${ip}/params`,
+		params: {
+			params: {
+				mqtt: {
+					endpoint,
+				},
+			},
+		},
+	});
+
+const sendCertFile = ({}) => post({
+	
+})
+
 export default {
 	getInfo,
 	scanAp,
 	getListAp,
 	connectAp,
+	sendDeviceId,
+	sendEndpoint,
 };

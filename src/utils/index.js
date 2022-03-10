@@ -1,4 +1,4 @@
 import DeviceHelper from './DeviceHelper';
 import CommonUtils from './CommonUtils';
-
-export { DeviceHelper, CommonUtils };
+import Crypto from './Crypto';
+export { DeviceHelper, CommonUtils, Crypto };

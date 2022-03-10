@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Flex from '@components/Flex';
 import { Colors } from '@assets';
@@ -9,27 +9,30 @@ import { AppNavigator } from '@navigation';
 
 const ConnectWifi = ({ navigation }) => {
 	useHeader(navigation);
-
+	const [currentSSID, setCurrentSSID] = useState('');
 	useEffect(() => {
 		WifiManager.getCurrentWifiSSID()
 			.then(data => {
-				console.log(data);
+				setCurrentSSID(data);
 			})
 			.catch(err => console.log(err));
 	}, []);
 
 	const handleRetry = () => {};
 
-	const handleInputPassword = () => {
-		navigation.navigate('RegisterDevice');
+	const handleInputPassword = password => {
+		navigation.navigate('RegisterDevice', {
+			wifiName: currentSSID,
+			password,
+		});
 	};
 
 	const handleSmartConfig = () => {
 		AppNavigator.showBottom({
 			screen: ConnectWifiPopup,
-			closeOnTouchOutside: true,
 			params: {
 				onInputPassword: handleInputPassword,
+				currentSSID,
 			},
 		});
 	};

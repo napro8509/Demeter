@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { forwardRef } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import Colors from '../assets/colors';
-
+import PropTypes from 'prop-types';
 const Input = forwardRef(
 	(
 		{
@@ -78,6 +78,19 @@ const Input = forwardRef(
 );
 
 export default Input;
+
+Input.propTypes = {
+	placeholder: PropTypes.string,
+	onChangeText: PropTypes.func,
+	leftIcon: PropTypes.any,
+	rightIcon: PropTypes.any,
+	leftIconStyle: PropTypes.any,
+	rightIconStyle: PropTypes.object,
+	containerStyle: PropTypes.object,
+	showCheck: PropTypes.bool,
+	leftText: PropTypes.string,
+	defaultValue: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
 	checkIconStyle: {

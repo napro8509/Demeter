@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setContext } from '@apollo/client/link/context';
 
 import * as Constants from '../constants';
+import { createUploadLink } from 'apollo-upload-client';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	console.log('graphQLErrors', graphQLErrors);
@@ -43,8 +44,10 @@ const httpLink = new HttpLink({
 	uri: Constants.GRAPHQL_URL,
 });
 
+const upload = createUploadLink({ uri: Constants.GRAPHQL_URL });
+
 const client = new ApolloClient({
-	link: concat(errorLink, concat(auth, httpLink)),
+	link: ApolloLink.from([errorLink, httpLink, upload, auth]),
 	// link: concat(errorLink, httpLink),
 	cache: new InMemoryCache(),
 });

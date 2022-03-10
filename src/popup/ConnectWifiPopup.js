@@ -3,8 +3,8 @@ import Input from '@components/Input';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const ConnectWifiPopup = ({ name = 'FoodMap', requestClose, params }) => {
-	const { onInputPassword } = params || {};
+const ConnectWifiPopup = ({ requestClose, params }) => {
+	const { onInputPassword, currentSSID } = params || {};
 
 	const [password, setPassword] = useState('');
 
@@ -19,7 +19,7 @@ const ConnectWifiPopup = ({ name = 'FoodMap', requestClose, params }) => {
 				<TouchableOpacity onPress={requestClose}>
 					<Text style={styles.cancelText}>Cancel</Text>
 				</TouchableOpacity>
-				<Text style={styles.name}>{name}</Text>
+				<Text style={styles.name}>{currentSSID}</Text>
 				<TouchableOpacity onPress={handleJoin}>
 					<Text style={styles.join(password?.length > 5)}>Join</Text>
 				</TouchableOpacity>

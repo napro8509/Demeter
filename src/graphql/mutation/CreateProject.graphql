@@ -1,0 +1,15 @@
+mutation CreateProject($input: CreateProjectDto!) {
+	createProject(project: $input) {
+		area
+		creatorId
+		endDate
+		id
+		imageUrl
+		latitude
+		location
+		longitude
+		name
+		projectType
+		startDate
+	}
+}

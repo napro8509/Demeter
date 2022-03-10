@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors  from '../assets/colors';
+import Colors from '../assets/colors';
 import Images from '../assets/images';
 import { Button } from '../components';
 import { DISABLED, PRIMARY } from '../constants';
@@ -36,10 +36,12 @@ const data = [
 	{
 		icon: Images.ic_project_weatherstation,
 		name: 'Weather Station',
+		type: 'others',
 	},
 	{
 		icon: Images.ic_project_gis,
 		name: 'GIS',
+		type: 'others',
 	},
 	{
 		icon: Images.ic_project_other,
@@ -60,7 +62,7 @@ const SelectProject = ({ navigation }) => {
 
 	const handleCreateProject = () => {
 		navigation.navigate('CreateProjectScreen', {
-			selectedType,
+			projectType: selectedType,
 		});
 	};
 

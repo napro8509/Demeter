@@ -57,6 +57,7 @@ export type CreateGroupDto = {
 export type CreateProjectDto = {
   area: Scalars['String'];
   endDate: Scalars['DateTime'];
+  imageUrl?: InputMaybe<Scalars['String']>;
   latitude?: InputMaybe<Scalars['String']>;
   location: Scalars['String'];
   longitude?: InputMaybe<Scalars['String']>;
@@ -325,6 +326,7 @@ export type ProjectEntity = {
   endDate: Scalars['DateTime'];
   groups: Array<GroupEntity>;
   id: Scalars['String'];
+  imageUrl?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['String']>;
   location: Scalars['String'];
   longitude?: Maybe<Scalars['String']>;
@@ -495,6 +497,7 @@ export type UpdateGroupDto = {
 export type UpdateProjectDto = {
   area?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['String']>;
+  imageUrl?: InputMaybe<Scalars['String']>;
   latitude?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
   longitude?: InputMaybe<Scalars['String']>;
@@ -544,6 +547,27 @@ export type ThingField = {
   value: Scalars['String'];
 };
 
+export type CreateDeviceMutationVariables = Exact<{
+  input: CreateDeviceDto;
+}>;
+
+
+export type CreateDeviceMutation = { __typename?: 'Mutation', createDevice: { __typename?: 'DeviceEntity', deviceProfileId: string, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, status?: string | null | undefined, token: string } };
+
+export type CreateProjectMutationVariables = Exact<{
+  input: CreateProjectDto;
+}>;
+
+
+export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, imageUrl?: string | null | undefined, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: string, startDate: any } };
+
+export type UploadImageMutationVariables = Exact<{
+  input: Scalars['Upload'];
+}>;
+
+
+export type UploadImageMutation = { __typename?: 'Mutation', uploadImage: { __typename?: 'ImageEntity', url?: string | null | undefined } };
+
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -587,6 +611,120 @@ export type GetUserDevicesQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUserDevicesQuery = { __typename?: 'Query', userDevices: Array<{ __typename?: 'UserDeviceEntity', deviceId: string, deviceProfileId: string, groupId?: string | null | undefined, name: string, id: string, projectId?: string | null | undefined, userId: string }> };
 
 
+export const CreateDeviceDocument = gql`
+    mutation CreateDevice($input: CreateDeviceDto!) {
+  createDevice(device: $input) {
+    deviceProfileId
+    deviceSerial
+    id
+    keyAndCerts
+    status
+    token
+  }
+}
+    `;
+export type CreateDeviceMutationFn = Apollo.MutationFunction<CreateDeviceMutation, CreateDeviceMutationVariables>;
+
+/**
+ * __useCreateDeviceMutation__
+ *
+ * To run a mutation, you first call `useCreateDeviceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDeviceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDeviceMutation, { data, loading, error }] = useCreateDeviceMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateDeviceMutation(baseOptions?: Apollo.MutationHookOptions<CreateDeviceMutation, CreateDeviceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateDeviceMutation, CreateDeviceMutationVariables>(CreateDeviceDocument, options);
+      }
+export type CreateDeviceMutationHookResult = ReturnType<typeof useCreateDeviceMutation>;
+export type CreateDeviceMutationResult = Apollo.MutationResult<CreateDeviceMutation>;
+export type CreateDeviceMutationOptions = Apollo.BaseMutationOptions<CreateDeviceMutation, CreateDeviceMutationVariables>;
+export const CreateProjectDocument = gql`
+    mutation CreateProject($input: CreateProjectDto!) {
+  createProject(project: $input) {
+    area
+    creatorId
+    endDate
+    id
+    imageUrl
+    latitude
+    location
+    longitude
+    name
+    projectType
+    startDate
+  }
+}
+    `;
+export type CreateProjectMutationFn = Apollo.MutationFunction<CreateProjectMutation, CreateProjectMutationVariables>;
+
+/**
+ * __useCreateProjectMutation__
+ *
+ * To run a mutation, you first call `useCreateProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createProjectMutation, { data, loading, error }] = useCreateProjectMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateProjectMutation, CreateProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateProjectMutation, CreateProjectMutationVariables>(CreateProjectDocument, options);
+      }
+export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
+export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
+export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const UploadImageDocument = gql`
+    mutation UploadImage($input: Upload!) {
+  uploadImage(image: $input) {
+    url
+  }
+}
+    `;
+export type UploadImageMutationFn = Apollo.MutationFunction<UploadImageMutation, UploadImageMutationVariables>;
+
+/**
+ * __useUploadImageMutation__
+ *
+ * To run a mutation, you first call `useUploadImageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadImageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadImageMutation, { data, loading, error }] = useUploadImageMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUploadImageMutation(baseOptions?: Apollo.MutationHookOptions<UploadImageMutation, UploadImageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadImageMutation, UploadImageMutationVariables>(UploadImageDocument, options);
+      }
+export type UploadImageMutationHookResult = ReturnType<typeof useUploadImageMutation>;
+export type UploadImageMutationResult = Apollo.MutationResult<UploadImageMutation>;
+export type UploadImageMutationOptions = Apollo.BaseMutationOptions<UploadImageMutation, UploadImageMutationVariables>;
 export const GetCategoriesDocument = gql`
     query getCategories {
   categories {

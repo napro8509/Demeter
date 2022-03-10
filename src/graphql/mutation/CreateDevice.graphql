@@ -1,0 +1,10 @@
+mutation CreateDevice($input: CreateDeviceDto!) {
+	createDevice(device: $input) {
+		deviceProfileId
+		deviceSerial
+		id
+		keyAndCerts
+		status
+		token
+	}
+}
