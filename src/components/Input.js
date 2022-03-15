@@ -54,7 +54,10 @@ const Input = forwardRef(
 						onChangeText={handleChangeText}
 						onFocus={handleFocus}
 						onBlur={handleBlur}
-						style={[styles.inputStyle, leftText && { textAlign: 'right' }]}
+						style={[
+							styles.inputStyle,
+							leftText && { textAlign: 'right', width: '100%' },
+						]}
 						placeholderTextColor={Colors.midGray}
 						{...otherProps}
 					/>
@@ -114,6 +117,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		fontSize: 16,
 		fontWeight: '400',
+		paddingVertical: 12,
 	},
 	leftIconStyle: {
 		height: 16,
@@ -128,6 +132,5 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: 2,
 		backgroundColor: isFocused ? Colors.green : Colors.underline,
-		marginTop: 14,
 	}),
 });

@@ -11,5 +11,6 @@ mutation CreateProject($input: CreateProjectDto!) {
 		name
 		projectType
 		startDate
+		imageUrl
 	}
 }

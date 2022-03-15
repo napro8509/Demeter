@@ -57,7 +57,7 @@ const SelectProject = ({ navigation }) => {
 	const keyExtractor = item => item.name;
 
 	const handleSelectProject = item => {
-		setSelectedType(item);
+		setSelectedType(item.type);
 	};
 
 	const handleCreateProject = () => {
@@ -69,15 +69,12 @@ const SelectProject = ({ navigation }) => {
 	const renderItem = ({ item, index }) => (
 		<View style={styles.itemContainer}>
 			<TouchableOpacity
-				style={styles.projectItem(item?.name === selectedType?.name)}
+				style={styles.projectItem(item?.type === selectedType)}
 				onPress={() => handleSelectProject(item)}
 			>
-				<Image
-					source={item.icon}
-					style={styles.iconProject(item?.name === selectedType?.name)}
-				/>
+				<Image source={item.icon} style={styles.iconProject(item?.type === selectedType)} />
 			</TouchableOpacity>
-			<Text style={styles.projectName(item?.name === selectedType?.name)}>{item?.name}</Text>
+			<Text style={styles.projectName(item?.type === selectedType)}>{item?.name}</Text>
 		</View>
 	);
 

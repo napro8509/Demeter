@@ -21,11 +21,17 @@ const projectList = [
 	},
 ];
 
-const SwitchProject = ({ requestClose, onManageProject }) => {
-	const [selectedProject, setSelectedProject] = useState(projectList[0]);
-
+const SwitchProject = ({ requestClose, onManageProject, onSelectProject, params }) => {
+	const { projects } = params || {};
+	const [selectedProject, setSelectedProject] = useState(projects[0]);
 	const handleManageProject = () => {
 		onManageProject?.();
+		requestClose?.();
+	};
+
+	const handleSelectProject = item => {
+		setSelectedProject(item);
+		onSelectProject?.(item);
 		requestClose?.();
 	};
 
@@ -37,12 +43,13 @@ const SwitchProject = ({ requestClose, onManageProject }) => {
 					<Image source={Images.ic_close} style={styles.iconClose} />
 				</TouchableOpacity>
 			</View>
-			{projectList.map(item => (
+			{projects.map(item => (
 				<TouchableOpacity
+					key={item.id}
 					style={styles.button(selectedProject?.id === item?.id)}
-					onPress={() => setSelectedProject(item)}
+					onPress={() => handleSelectProject(item)}
 				>
-					<Image source={item.icon} style={styles.icon} />
+					<Image source={{ uri: item?.imageUrl }} style={styles.icon} />
 					<Text style={styles.name(selectedProject?.id === item?.id)}>{item.name}</Text>
 				</TouchableOpacity>
 			))}

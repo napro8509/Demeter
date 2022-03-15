@@ -24,27 +24,30 @@ const projectList = [
 	},
 ];
 
-const ManageProjects = ({ navigation }) => {
+const ManageProjects = ({ navigation, route }) => {
+	const { projects = [] } = route?.params || {};
 	useHeader(navigation);
 
 	const handleCreateProject = () => {
 		navigation.navigate('SelectProjectScreen');
 	};
 
-	const handleGoProjectDetail = () => {
-		navigation.navigate('ProjectDetailScreen');
+	const handleGoProjectDetail = item => {
+		navigation.navigate('ProjectDetailScreen', {
+			data: item,
+		});
 	};
 
 	return (
 		<Flex style={styles.container}>
 			<View style={styles.wrapper}>
-				{projectList.map(item => (
+				{projects?.map(item => (
 					<TouchableOpacity
 						style={styles.button}
-						onPress={handleGoProjectDetail}
+						onPress={() => handleGoProjectDetail(item)}
 						key={item.id}
 					>
-						<Image source={item.icon} style={styles.icon} />
+						<Image source={{ uri: item?.imageUrl }} style={styles.icon} />
 						<Text style={styles.name}>{item.name}</Text>
 					</TouchableOpacity>
 				))}

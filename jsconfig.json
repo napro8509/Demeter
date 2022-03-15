@@ -21,7 +21,8 @@
 			"@components/*": ["components/*"],
 			"@hooks": ["hooks"],
 			"@navigation": ["navigation"],
-			"@constants": ["constants"]
+			"@constants": ["constants"],
+			"@graphql": ["graphql"]
 		}
 	},
 	"include": ["src"],

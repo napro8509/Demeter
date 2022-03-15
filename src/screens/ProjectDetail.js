@@ -28,14 +28,15 @@ const projectInfo = ({ projectType, projectName, location, area }) => [
 	},
 ];
 
-const ProjectDetail = ({ navigation }) => {
+const ProjectDetail = ({ navigation, route }) => {
+	const { data: projectDetail } = route?.params || {};
 	useHeader(navigation);
 
 	const data = projectInfo({
 		projectType: 'Smart Home',
-		projectName: 'Foodmap Warehouse',
-		location: 'Ho Chi Minh City, Vietnam',
-		area: '50 m2',
+		projectName: projectDetail?.name,
+		location: projectDetail?.location,
+		area: projectDetail?.area,
 	});
 
 	const handleManageDevices = () => {

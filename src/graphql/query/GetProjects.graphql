@@ -10,6 +10,7 @@ query getProjects {
 		name
 		projectType
 		startDate
+		imageUrl
 		groups {
 			area
 			creatorId

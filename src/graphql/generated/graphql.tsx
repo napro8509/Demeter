@@ -603,7 +603,7 @@ export type GetProfileQuery = { __typename?: 'Query', getProfile: { __typename?:
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: string, startDate: any, groups: Array<{ __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, projectId: string, startDate: any, type: string, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId: string, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, token: string }> }> }> };
+export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: string, startDate: any, imageUrl?: string | null | undefined, groups: Array<{ __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, projectId: string, startDate: any, type: string, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId: string, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, token: string }> }> }> };
 
 export type GetUserDevicesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -663,6 +663,7 @@ export const CreateProjectDocument = gql`
     name
     projectType
     startDate
+    imageUrl
   }
 }
     `;
@@ -984,6 +985,7 @@ export const GetProjectsDocument = gql`
     name
     projectType
     startDate
+    imageUrl
     groups {
       area
       creatorId

@@ -24,7 +24,7 @@ const CreateProject = ({ navigation, route }) => {
 
 	const handleSelectImage = async () => {
 		const result = await launchImageLibrary({
-			mediaType: 'photo',
+			mediaType: 'mixed',
 		});
 		const url = result?.assets?.[0]?.uri;
 		if (url) {
@@ -33,12 +33,22 @@ const CreateProject = ({ navigation, route }) => {
 				fileType: mime.lookup(url) || 'image',
 				fileName: `picture_${new Date().getTime()}`,
 			}).then(source => {
+				console.log(source);
 				setImageSource(source);
 			});
 		}
 	};
 
 	const handleCreateProject = () => {
+		console.log({
+			area,
+			location,
+			name,
+			startDate: new Date().toDateString(),
+			endDate: new Date().toDateString(),
+			projectType,
+			imageUrl: imageSource,
+		});
 		createProject({
 			variables: {
 				input: {
@@ -48,6 +58,7 @@ const CreateProject = ({ navigation, route }) => {
 					startDate: new Date().toDateString(),
 					endDate: new Date().toDateString(),
 					projectType,
+					imageUrl: imageSource,
 				},
 			},
 			onCompleted: () => {
@@ -55,6 +66,7 @@ const CreateProject = ({ navigation, route }) => {
 					{ text: 'Ok', onPress: navigation.popToTop() },
 				]);
 			},
+			onError: console.log,
 		});
 	};
 
@@ -63,9 +75,13 @@ const CreateProject = ({ navigation, route }) => {
 			<ScrollView style={styles.wrapper}>
 				<TouchableOpacity style={styles.button} onPress={handleSelectImage}>
 					<Image
-						source={{
-							uri: imageSource,
-						}}
+						source={
+							imageSource
+								? {
+									uri: imageSource,
+								  }
+								: Images.ic_add_image
+						}
 						style={styles.addButton}
 					/>
 				</TouchableOpacity>

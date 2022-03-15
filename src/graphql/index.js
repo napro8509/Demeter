@@ -13,6 +13,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import * as Constants from '../constants';
 import { createUploadLink } from 'apollo-upload-client';
+import { Alert } from 'react-native';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	console.log('graphQLErrors', graphQLErrors);
@@ -47,7 +48,7 @@ const httpLink = new HttpLink({
 const upload = createUploadLink({ uri: Constants.GRAPHQL_URL });
 
 const client = new ApolloClient({
-	link: ApolloLink.from([errorLink, httpLink, upload, auth]),
+	link: concat(errorLink, concat(auth, httpLink)),
 	// link: concat(errorLink, httpLink),
 	cache: new InMemoryCache(),
 });

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useGetProjectsLazyQuery } from '@graphql/generated/graphql';
+import React, { useEffect, useRef, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from '../assets/colors';
@@ -9,21 +10,44 @@ import DeviceHelper from '../utils/DeviceHelper';
 
 const HomeScreen = ({ navigation }) => {
 	const [activeTab, setActiveTab] = useState(0);
+	const [selectedProject, setSelectedProject] = useState({});
+	const projects = useRef();
+	const [getProjects] = useGetProjectsLazyQuery();
+	useEffect(() => {
+		getProjects({
+			onCompleted: response => {
+				console.log(JSON.stringify(response))
+				if (response?.projects?.length > 0) {
+					projects.current = response?.projects;
+					setSelectedProject(response?.projects?.[0]);
+				}
+			},
+		});
+	}, []);
 
 	const handleAddProject = () => {
-		// navigation.navigate('SelectProjectScreen');
 		navigation.navigate('AddDevice');
+	};
+
+	const handleChangeProject = item => {
+		setSelectedProject(item);
 	};
 
 	const handleSwitchProject = () => {
 		AppNavigator.showBottom({
 			screen: SwitchProject,
 			onManageProject: handleManageProject,
+			onSelectProject: handleChangeProject,
+			params: {
+				projects: projects?.current,
+			},
 		});
 	};
 
 	const handleManageProject = () => {
-		navigation.navigate('ManageProjects');
+		navigation.navigate('ManageProjects', {
+			projects: projects.current,
+		});
 	};
 
 	const handleManageZone = () => {
@@ -35,7 +59,9 @@ const HomeScreen = ({ navigation }) => {
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<TouchableOpacity onPress={handleSwitchProject} style={styles.projectButton}>
-						<Text style={styles.projectName}>Empty Project</Text>
+						<Text style={styles.projectName}>
+							{selectedProject?.name || 'Empty Project'}
+						</Text>
 						<Image
 							source={Images.ic_arrow_down}
 							style={styles.arrowDown}
