@@ -48,6 +48,7 @@ export type CreateDeviceProfileDto = {
 export type CreateGroupDto = {
   area: Scalars['String'];
   endDate: Scalars['DateTime'];
+  imageUrl?: InputMaybe<Scalars['String']>;
   location: Scalars['String'];
   name: Scalars['String'];
   projectId: Scalars['String'];
@@ -118,6 +119,7 @@ export type GroupEntity = {
   devices: Array<DeviceEntity>;
   endDate: Scalars['DateTime'];
   id: Scalars['String'];
+  imageUrl?: Maybe<Scalars['String']>;
   location: Scalars['String'];
   name: Scalars['String'];
   projectId: Scalars['String'];
@@ -331,7 +333,7 @@ export type ProjectEntity = {
   location: Scalars['String'];
   longitude?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  projectType: Scalars['String'];
+  projectType: ProjectType;
   startDate: Scalars['DateTime'];
 };
 
@@ -491,6 +493,7 @@ export type UpdateDeviceProfileDto = {
 };
 
 export type UpdateGroupDto = {
+  imageUrl?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -554,12 +557,26 @@ export type CreateDeviceMutationVariables = Exact<{
 
 export type CreateDeviceMutation = { __typename?: 'Mutation', createDevice: { __typename?: 'DeviceEntity', deviceProfileId: string, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, status?: string | null | undefined, token: string } };
 
+export type CreateGroupMutationVariables = Exact<{
+  input: CreateGroupDto;
+}>;
+
+
+export type CreateGroupMutation = { __typename?: 'Mutation', createGroup: { __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, startDate: any, projectId: string } };
+
 export type CreateProjectMutationVariables = Exact<{
   input: CreateProjectDto;
 }>;
 
 
-export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, imageUrl?: string | null | undefined, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: string, startDate: any } };
+export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, imageUrl?: string | null | undefined, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any } };
+
+export type RemoveProjectMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveProjectMutation = { __typename?: 'Mutation', removeProject: boolean };
 
 export type UploadImageMutationVariables = Exact<{
   input: Scalars['Upload'];
@@ -598,12 +615,12 @@ export type GetGroupsQuery = { __typename?: 'Query', groups: Array<{ __typename?
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', getProfile: { __typename?: 'UserEntity', email: string, id: string, password: string, phone: string, role?: string | null | undefined, projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: string, startDate: any }> } };
+export type GetProfileQuery = { __typename?: 'Query', getProfile: { __typename?: 'UserEntity', email: string, id: string, password: string, phone: string, role?: string | null | undefined, projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any }> } };
 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: string, startDate: any, imageUrl?: string | null | undefined, groups: Array<{ __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, projectId: string, startDate: any, type: string, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId: string, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, token: string }> }> }> };
+export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any, imageUrl?: string | null | undefined, groups: Array<{ __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, projectId: string, imageUrl?: string | null | undefined, startDate: any, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId: string, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, status?: string | null | undefined, token: string }> }> }> };
 
 export type GetUserDevicesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -649,6 +666,46 @@ export function useCreateDeviceMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateDeviceMutationHookResult = ReturnType<typeof useCreateDeviceMutation>;
 export type CreateDeviceMutationResult = Apollo.MutationResult<CreateDeviceMutation>;
 export type CreateDeviceMutationOptions = Apollo.BaseMutationOptions<CreateDeviceMutation, CreateDeviceMutationVariables>;
+export const CreateGroupDocument = gql`
+    mutation CreateGroup($input: CreateGroupDto!) {
+  createGroup(group: $input) {
+    area
+    creatorId
+    endDate
+    id
+    location
+    name
+    startDate
+    projectId
+  }
+}
+    `;
+export type CreateGroupMutationFn = Apollo.MutationFunction<CreateGroupMutation, CreateGroupMutationVariables>;
+
+/**
+ * __useCreateGroupMutation__
+ *
+ * To run a mutation, you first call `useCreateGroupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateGroupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createGroupMutation, { data, loading, error }] = useCreateGroupMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateGroupMutation(baseOptions?: Apollo.MutationHookOptions<CreateGroupMutation, CreateGroupMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateGroupMutation, CreateGroupMutationVariables>(CreateGroupDocument, options);
+      }
+export type CreateGroupMutationHookResult = ReturnType<typeof useCreateGroupMutation>;
+export type CreateGroupMutationResult = Apollo.MutationResult<CreateGroupMutation>;
+export type CreateGroupMutationOptions = Apollo.BaseMutationOptions<CreateGroupMutation, CreateGroupMutationVariables>;
 export const CreateProjectDocument = gql`
     mutation CreateProject($input: CreateProjectDto!) {
   createProject(project: $input) {
@@ -693,6 +750,37 @@ export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
 export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
 export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const RemoveProjectDocument = gql`
+    mutation removeProject($id: String!) {
+  removeProject(id: $id)
+}
+    `;
+export type RemoveProjectMutationFn = Apollo.MutationFunction<RemoveProjectMutation, RemoveProjectMutationVariables>;
+
+/**
+ * __useRemoveProjectMutation__
+ *
+ * To run a mutation, you first call `useRemoveProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeProjectMutation, { data, loading, error }] = useRemoveProjectMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveProjectMutation(baseOptions?: Apollo.MutationHookOptions<RemoveProjectMutation, RemoveProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveProjectMutation, RemoveProjectMutationVariables>(RemoveProjectDocument, options);
+      }
+export type RemoveProjectMutationHookResult = ReturnType<typeof useRemoveProjectMutation>;
+export type RemoveProjectMutationResult = Apollo.MutationResult<RemoveProjectMutation>;
+export type RemoveProjectMutationOptions = Apollo.BaseMutationOptions<RemoveProjectMutation, RemoveProjectMutationVariables>;
 export const UploadImageDocument = gql`
     mutation UploadImage($input: Upload!) {
   uploadImage(image: $input) {
@@ -994,13 +1082,14 @@ export const GetProjectsDocument = gql`
       location
       name
       projectId
+      imageUrl
       startDate
-      type
       devices {
         deviceProfileId
         deviceSerial
         id
         keyAndCerts
+        status
         token
       }
     }

@@ -7,7 +7,7 @@ import { DISABLED, PRIMARY } from '../constants';
 import useHeader from '../hooks/useHeader';
 import DeviceHelper from '../utils/DeviceHelper';
 
-const data = [
+export const ProjectData = [
 	{
 		icon: Images.ic_project_agircuture,
 		name: 'Agriculture',
@@ -83,7 +83,7 @@ const SelectProject = ({ navigation }) => {
 			<Text style={styles.projectType}>Choose a Project Type</Text>
 			<FlatList
 				numColumns={3}
-				data={data}
+				data={ProjectData}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}
 				columnWrapperStyle={styles.column}

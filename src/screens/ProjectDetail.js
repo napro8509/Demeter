@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
 import Flex from '../components/Flex';
@@ -9,6 +9,9 @@ import Button from '../components/Button';
 import { OUTLINE } from '../constants';
 import AppNavigator from '../navigation/AppNavigator';
 import RemoveProject from '../popup/RemoveProject';
+import { ProjectData } from './SelectProject';
+import { useRemoveProjectMutation } from '@graphql/generated/graphql';
+
 const projectInfo = ({ projectType, projectName, location, area }) => [
 	{
 		key: 'Project Type',
@@ -30,10 +33,15 @@ const projectInfo = ({ projectType, projectName, location, area }) => [
 
 const ProjectDetail = ({ navigation, route }) => {
 	const { data: projectDetail } = route?.params || {};
+	const { groups = [] } = projectDetail || {};
 	useHeader(navigation);
+	const [removeProject] = useRemoveProjectMutation();
+	const projectTypeName = ProjectData.find(
+		item => item.type === projectDetail?.projectType
+	)?.name;
 
 	const data = projectInfo({
-		projectType: 'Smart Home',
+		projectType: projectTypeName,
 		projectName: projectDetail?.name,
 		location: projectDetail?.location,
 		area: projectDetail?.area,
@@ -44,14 +52,36 @@ const ProjectDetail = ({ navigation, route }) => {
 	};
 
 	const handleManageZones = () => {
-		navigation.navigate('ManageZones');
+		console.log(projectDetail);
+		navigation.navigate('ManageZones', {
+			projectId: projectDetail?.id,
+			groups: projectDetail?.groups || [],
+		});
+	};
+
+	const handleConfirmRemove = () => {
+		removeProject({
+			variables: {
+				id: projectDetail?.id,
+			},
+			onCompleted: response => {
+				if (response?.removeProject) {
+					Alert.alert('Notification', 'Remove project successfully', [
+						{ text: 'Ok', onPress: navigation.popToTop() },
+					]);
+				}
+			},
+		});
 	};
 
 	const handleRemoveProject = () => {
 		AppNavigator.showBottom({
 			screen: RemoveProject,
+			onRemove: handleConfirmRemove,
 		});
 	};
+
+	const zones = groups?.map?.(item => item.name)?.join(', ') || '';
 
 	return (
 		<Flex style={styles.container}>
@@ -73,6 +103,7 @@ const ProjectDetail = ({ navigation, route }) => {
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.lineContainer} onPress={handleManageZones}>
 					<Text style={styles.title}>Zones</Text>
+					<Text style={styles.value}>{zones}</Text>
 					<Image source={Images.ic_arrow_right} style={styles.rightIcon} />
 				</TouchableOpacity>
 			</ScrollView>
@@ -136,7 +167,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		paddingVertical: 16,
 		shadowRadius: 20,
-		shadowColor: 'black',
+		shadowColor: Colors.black,
 		shadowOpacity: 0.15,
 		backgroundColor: Colors.white,
 	},

@@ -1,0 +1,12 @@
+mutation CreateGroup($input: CreateGroupDto!) {
+	createGroup(group: $input) {
+		area
+		creatorId
+		endDate
+		id
+		location
+		name
+		startDate
+		projectId
+	}
+}

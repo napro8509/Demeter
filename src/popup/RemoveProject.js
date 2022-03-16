@@ -3,13 +3,14 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
 
-const RemoveProject = ({ requestClose }) => {
+const RemoveProject = ({ requestClose, onRemove }) => {
 	const handleCancel = () => {
 		requestClose?.();
 	};
 
 	const handleRemove = () => {
 		requestClose?.();
+		onRemove?.();
 	};
 
 	return (

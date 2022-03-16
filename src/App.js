@@ -31,6 +31,7 @@ import withApollo from './graphql';
 import AddDevice from './screens/AddDevice';
 import ConnectWifi from './screens/ConnectWifi';
 import RegisterDevice from './screens/RegisterDevice';
+import CreateZones from './screens/CreateZones';
 
 const Stack = createNativeStackNavigator();
 
@@ -172,6 +173,13 @@ const MainStackNavigator = () => (
 			}}
 			name='RegisterDevice'
 			component={RegisterDevice}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Create zones',
+			}}
+			name='CreateZones'
+			component={CreateZones}
 		/>
 	</MainStack.Navigator>
 );

@@ -19,13 +19,14 @@ query getProjects {
 			location
 			name
 			projectId
+			imageUrl
 			startDate
-			type
 			devices {
 				deviceProfileId
 				deviceSerial
 				id
 				keyAndCerts
+				status
 				token
 			}
 		}
