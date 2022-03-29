@@ -5,28 +5,22 @@ const startSmartConfig = ({ wifiName, password }) => {
 	const TIME_OUT_SMART_CONFIG = 30 * 1000; // 30s
 	let foundDevice = false;
 	return new Promise((resolve, reject) => {
-		resolve([
-			{
-				ipv4: '10.67.3.74',
-			},
-		]);
-		return;
-		// SmartConfig.start(wifiName, wifiBssid, password, TIME_OUT_SMART_CONFIG, event => {
-		// 	console.log(event);
-		// 	let { eventName, data } = event;
-		// 	if (eventName === 'onFoundDevice') {
-		// 		foundDevice = true;
-		// 		data = JSON.parse(data);
-		// 		resolve(data);
-		// 		// data in event is ip of ESP
-		// 		console.log('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
-		// 	} else {
-		// 		if (!foundDevice) {
-		// 			reject('Not found');
-		// 			console.log('Not found');
-		// 		}
-		// 	}
-		// });
+		SmartConfig.start(wifiName, wifiBssid, password, TIME_OUT_SMART_CONFIG, event => {
+			console.log(event);
+			let { eventName, data } = event;
+			if (eventName === 'onFoundDevice') {
+				foundDevice = true;
+				data = JSON.parse(data);
+				resolve(data);
+				// data in event is ip of ESP
+				console.log('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
+			} else {
+				if (!foundDevice) {
+					reject('Not found');
+					console.log('Not found');
+				}
+			}
+		});
 	});
 };
 

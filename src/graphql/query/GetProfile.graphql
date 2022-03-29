@@ -5,17 +5,5 @@ query getProfile {
 		password
 		phone
 		role
-		projects {
-			area
-			creatorId
-			endDate
-			id
-			latitude
-			location
-			longitude
-			name
-			projectType
-			startDate
-		}
 	}
 }

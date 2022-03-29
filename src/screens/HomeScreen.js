@@ -1,4 +1,8 @@
-import { useGetProjectsLazyQuery } from '@graphql/generated/graphql';
+import {
+	useGetProjectsLazyQuery,
+	useGetDevicesLazyQuery,
+	useGetGroupsLazyQuery,
+} from '@graphql/generated/graphql';
 import React, { useEffect, useRef, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,19 +15,43 @@ import DeviceHelper from '../utils/DeviceHelper';
 const HomeScreen = ({ navigation }) => {
 	const [activeTab, setActiveTab] = useState(0);
 	const [selectedProject, setSelectedProject] = useState({});
+	const [groups, setGroups] = useState([]);
 	const projects = useRef();
+	const allGroups = useRef([]);
 	const [getProjects] = useGetProjectsLazyQuery();
+	const [getDevices] = useGetDevicesLazyQuery();
+	const [getGroups] = useGetGroupsLazyQuery();
 	useEffect(() => {
 		getProjects({
 			onCompleted: response => {
-				console.log(JSON.stringify(response))
+				console.log(JSON.stringify(response));
 				if (response?.projects?.length > 0) {
 					projects.current = response?.projects;
 					setSelectedProject(response?.projects?.[0]);
 				}
+				getGroups({
+					onCompleted: handleGetGroupsSuccess,
+				});
 			},
 		});
+		getDevices({
+			onCompleted: console.log,
+		});
 	}, []);
+
+	useEffect(() => {
+		if (selectedProject?.id) {
+			setGroups(allGroups.current?.filter(item => item.projectId === selectedProject?.id));
+		}
+	}, [selectedProject]);
+
+	const handleGetGroupsSuccess = groupData => {
+		console.log(groupData.groups);
+		if (groupData?.groups?.length > 0) {
+			allGroups.current = groupData?.groups;
+			setGroups(groupData?.groups.filter(item => item?.projectId === selectedProject?.id));
+		}
+	};
 
 	const handleAddProject = () => {
 		navigation.navigate('AddDevice');
@@ -96,12 +124,11 @@ const HomeScreen = ({ navigation }) => {
 						<TouchableOpacity onPress={() => setActiveTab(0)}>
 							<Text style={styles.tab(activeTab === 0)}>My Devices</Text>
 						</TouchableOpacity>
-						<TouchableOpacity onPress={() => setActiveTab(1)}>
-							<Text style={styles.tab(activeTab === 1)}>Storage Room</Text>
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => setActiveTab(2)}>
-							<Text style={styles.tab(activeTab === 2)}>Frozen Room</Text>
-						</TouchableOpacity>
+						{groups.map(item => (
+							<TouchableOpacity onPress={() => setActiveTab(0)}>
+								<Text style={styles.tab(activeTab === 0)}>{item?.name}</Text>
+							</TouchableOpacity>
+						))}
 					</ScrollView>
 					<TouchableOpacity onPress={handleManageZone}>
 						<Image source={Images.ic_menu} style={styles.iconMenu} />

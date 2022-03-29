@@ -8,6 +8,5 @@ query getGroups {
 		name
 		projectId
 		startDate
-		type
 	}
 }
