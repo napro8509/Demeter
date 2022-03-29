@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
 import Flex from '../components/Flex';
@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import { OUTLINE } from '../constants';
 import AppNavigator from '../navigation/AppNavigator';
 import RemoveProject from '../popup/RemoveProject';
+import { useRemoveGroupMutation } from '@graphql/generated/graphql';
 const projectInfo = ({ projectType, projectName, location, area }) => [
 	{
 		key: 'Zone Type',
@@ -28,14 +29,18 @@ const projectInfo = ({ projectType, projectName, location, area }) => [
 	},
 ];
 
-const ZoneDetail = ({ navigation }) => {
+const ZoneDetail = ({ navigation, route }) => {
 	useHeader(navigation);
+	const { zoneData } = route?.params || {};
+	console.log(zoneData);
+
+	const [removeZone] = useRemoveGroupMutation();
 
 	const data = projectInfo({
 		projectType: 'Container 1',
-		projectName: 'Warehouse',
-		location: 'Ho Chi Minh City, Vietnam',
-		area: '50 m2',
+		projectName: zoneData?.name,
+		location: zoneData?.location,
+		area: zoneData?.area,
 	});
 
 	const handleManageDevices = () => {};
@@ -43,6 +48,22 @@ const ZoneDetail = ({ navigation }) => {
 	const handleRemoveProject = () => {
 		AppNavigator.showBottom({
 			screen: RemoveProject,
+			onRemove: handleRemoveZone,
+		});
+	};
+
+	const handleUpdate = () => {
+		Alert.alert('Notification', 'Remove zone successfully', [
+			{ text: 'Ok', onPress: navigation.popToTop() },
+		]);
+	};
+
+	const handleRemoveZone = () => {
+		removeZone({
+			variables: {
+				id: zoneData?.id,
+			},
+			onCompleted: handleUpdate,
 		});
 	};
 

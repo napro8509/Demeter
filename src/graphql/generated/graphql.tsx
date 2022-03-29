@@ -578,6 +578,21 @@ export type RemoveProjectMutationVariables = Exact<{
 
 export type RemoveProjectMutation = { __typename?: 'Mutation', removeProject: boolean };
 
+export type RemoveGroupMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemoveGroupMutation = { __typename?: 'Mutation', removeGroup: boolean };
+
+export type UpdateProjectMutationVariables = Exact<{
+  id: Scalars['String'];
+  input: UpdateProjectDto;
+}>;
+
+
+export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject: { __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, imageUrl?: string | null | undefined, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any } };
+
 export type UploadImageMutationVariables = Exact<{
   input: Scalars['Upload'];
 }>;
@@ -781,6 +796,82 @@ export function useRemoveProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type RemoveProjectMutationHookResult = ReturnType<typeof useRemoveProjectMutation>;
 export type RemoveProjectMutationResult = Apollo.MutationResult<RemoveProjectMutation>;
 export type RemoveProjectMutationOptions = Apollo.BaseMutationOptions<RemoveProjectMutation, RemoveProjectMutationVariables>;
+export const RemoveGroupDocument = gql`
+    mutation removeGroup($id: String!) {
+  removeGroup(id: $id)
+}
+    `;
+export type RemoveGroupMutationFn = Apollo.MutationFunction<RemoveGroupMutation, RemoveGroupMutationVariables>;
+
+/**
+ * __useRemoveGroupMutation__
+ *
+ * To run a mutation, you first call `useRemoveGroupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveGroupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeGroupMutation, { data, loading, error }] = useRemoveGroupMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveGroupMutation(baseOptions?: Apollo.MutationHookOptions<RemoveGroupMutation, RemoveGroupMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveGroupMutation, RemoveGroupMutationVariables>(RemoveGroupDocument, options);
+      }
+export type RemoveGroupMutationHookResult = ReturnType<typeof useRemoveGroupMutation>;
+export type RemoveGroupMutationResult = Apollo.MutationResult<RemoveGroupMutation>;
+export type RemoveGroupMutationOptions = Apollo.BaseMutationOptions<RemoveGroupMutation, RemoveGroupMutationVariables>;
+export const UpdateProjectDocument = gql`
+    mutation updateProject($id: String!, $input: UpdateProjectDto!) {
+  updateProject(id: $id, updateProject: $input) {
+    area
+    creatorId
+    endDate
+    id
+    imageUrl
+    latitude
+    location
+    longitude
+    name
+    projectType
+    startDate
+    imageUrl
+  }
+}
+    `;
+export type UpdateProjectMutationFn = Apollo.MutationFunction<UpdateProjectMutation, UpdateProjectMutationVariables>;
+
+/**
+ * __useUpdateProjectMutation__
+ *
+ * To run a mutation, you first call `useUpdateProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProjectMutation, { data, loading, error }] = useUpdateProjectMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProjectMutation, UpdateProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProjectMutation, UpdateProjectMutationVariables>(UpdateProjectDocument, options);
+      }
+export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
+export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
+export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
 export const UploadImageDocument = gql`
     mutation UploadImage($input: Upload!) {
   uploadImage(image: $input) {

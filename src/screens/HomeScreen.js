@@ -13,7 +13,7 @@ import SwitchProject from '../popup/SwitchProject';
 import DeviceHelper from '../utils/DeviceHelper';
 
 const HomeScreen = ({ navigation }) => {
-	const [activeTab, setActiveTab] = useState(0);
+	const [activeTab, setActiveTab] = useState('ALl');
 	const [selectedProject, setSelectedProject] = useState({});
 	const [groups, setGroups] = useState([]);
 	const projects = useRef();
@@ -22,6 +22,19 @@ const HomeScreen = ({ navigation }) => {
 	const [getDevices] = useGetDevicesLazyQuery();
 	const [getGroups] = useGetGroupsLazyQuery();
 	useEffect(() => {
+		handleGetProject();
+		getDevices({
+			onCompleted: console.log,
+		});
+	}, []);
+
+	useEffect(() => {
+		if (selectedProject?.id) {
+			setGroups(allGroups.current?.filter(item => item.projectId === selectedProject?.id));
+		}
+	}, [selectedProject]);
+
+	const handleGetProject = () => {
 		getProjects({
 			onCompleted: response => {
 				console.log(JSON.stringify(response));
@@ -34,16 +47,7 @@ const HomeScreen = ({ navigation }) => {
 				});
 			},
 		});
-		getDevices({
-			onCompleted: console.log,
-		});
-	}, []);
-
-	useEffect(() => {
-		if (selectedProject?.id) {
-			setGroups(allGroups.current?.filter(item => item.projectId === selectedProject?.id));
-		}
-	}, [selectedProject]);
+	};
 
 	const handleGetGroupsSuccess = groupData => {
 		console.log(groupData.groups);
@@ -68,6 +72,7 @@ const HomeScreen = ({ navigation }) => {
 			onSelectProject: handleChangeProject,
 			params: {
 				projects: projects?.current,
+				selectedProject,
 			},
 		});
 	};
@@ -79,15 +84,30 @@ const HomeScreen = ({ navigation }) => {
 	};
 
 	const handleManageZone = () => {
-		navigation.navigate('ManageZones');
+		navigation.navigate('ManageZones', {
+			projectId: selectedProject?.id,
+			groups: selectedProject?.groups || [],
+		});
 	};
+
+	const handleGoDeviceControl = () => {
+		navigation.navigate('DeviceSwitch');
+	};
+
+	const tabList = [
+		{
+			id: 'ALL',
+			name: 'My Devices',
+		},
+		...groups,
+	];
 
 	return (
 		<SafeAreaView style={styles.flex}>
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<TouchableOpacity onPress={handleSwitchProject} style={styles.projectButton}>
-						<Text style={styles.projectName}>
+						<Text style={styles.projectName} numberOfLines={1}>
 							{selectedProject?.name || 'Empty Project'}
 						</Text>
 						<Image
@@ -120,13 +140,11 @@ const HomeScreen = ({ navigation }) => {
 						horizontal
 						contentContainerStyle={styles.contentStyle}
 						style={styles.scrollView}
+						showsHorizontalScrollIndicator={false}
 					>
-						<TouchableOpacity onPress={() => setActiveTab(0)}>
-							<Text style={styles.tab(activeTab === 0)}>My Devices</Text>
-						</TouchableOpacity>
-						{groups.map(item => (
-							<TouchableOpacity onPress={() => setActiveTab(0)}>
-								<Text style={styles.tab(activeTab === 0)}>{item?.name}</Text>
+						{tabList.map(item => (
+							<TouchableOpacity onPress={() => setActiveTab(item.id)} key={item.id}>
+								<Text style={styles.tab(activeTab === item.id)}>{item?.name}</Text>
 							</TouchableOpacity>
 						))}
 					</ScrollView>
@@ -135,7 +153,7 @@ const HomeScreen = ({ navigation }) => {
 					</TouchableOpacity>
 				</View>
 				<View style={styles.rowBlock}>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={handleGoDeviceControl}>
 						<Image source={Images.img_light_demo} style={styles.demoLight} />
 					</TouchableOpacity>
 					<TouchableOpacity>
@@ -180,6 +198,7 @@ const styles = StyleSheet.create({
 		color: Colors.black,
 		fontSize: 26,
 		fontWeight: 'bold',
+		flex: 1,
 	},
 	arrowDown: {
 		width: 20,

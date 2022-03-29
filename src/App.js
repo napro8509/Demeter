@@ -32,6 +32,8 @@ import AddDevice from './screens/AddDevice';
 import ConnectWifi from './screens/ConnectWifi';
 import RegisterDevice from './screens/RegisterDevice';
 import CreateZones from './screens/CreateZones';
+import EditProject from './screens/EditProject';
+import DeviceSwitch from './screens/DeviceSwitch';
 
 const Stack = createNativeStackNavigator();
 
@@ -180,6 +182,20 @@ const MainStackNavigator = () => (
 			}}
 			name='CreateZones'
 			component={CreateZones}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Edit Project',
+			}}
+			name='EditProject'
+			component={EditProject}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Device Switch',
+			}}
+			name='DeviceSwitch'
+			component={DeviceSwitch}
 		/>
 	</MainStack.Navigator>
 );

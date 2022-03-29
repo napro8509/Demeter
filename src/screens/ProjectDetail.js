@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
@@ -33,7 +33,7 @@ const projectInfo = ({ projectType, projectName, location, area }) => [
 
 const ProjectDetail = ({ navigation, route }) => {
 	const { data: projectDetail } = route?.params || {};
-	const { groups = [] } = projectDetail || {};
+	const { groups = [], imageUrl } = projectDetail || {};
 	useHeader(navigation);
 	const [removeProject] = useRemoveProjectMutation();
 	const projectTypeName = ProjectData.find(
@@ -46,6 +46,25 @@ const ProjectDetail = ({ navigation, route }) => {
 		location: projectDetail?.location,
 		area: projectDetail?.area,
 	});
+
+	useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<View style={styles.rightContainer}>
+					<TouchableOpacity style={styles.qrIcon} onPress={handleShowOption}>
+						<Image source={Images.ic_options} style={styles.icon} />
+					</TouchableOpacity>
+				</View>
+			),
+		});
+	}, []);
+
+	const handleShowOption = () => {
+		navigation.navigate('EditProject', {
+			projectId: projectDetail?.id,
+			projectData: projectDetail,
+		});
+	};
 
 	const handleManageDevices = () => {
 		navigation.navigate('ProjectDevices');
@@ -86,7 +105,7 @@ const ProjectDetail = ({ navigation, route }) => {
 	return (
 		<Flex style={styles.container}>
 			<ScrollView contentContainerStyle={styles.wrapper}>
-				<Image source={Images.img_project} style={styles.projectImage} />
+				<Image source={{ uri: imageUrl }} style={styles.projectImage} />
 				<Text style={styles.information}>Information</Text>
 				<Image source={Images.img_maps} style={styles.maps} />
 				{data.map(item => (
@@ -170,5 +189,16 @@ const styles = StyleSheet.create({
 		shadowColor: Colors.black,
 		shadowOpacity: 0.15,
 		backgroundColor: Colors.white,
+	},
+	icon: {
+		width: 20,
+		height: 20,
+	},
+	rightContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	qrIcon: {
+		marginRight: 8,
 	},
 });

@@ -22,8 +22,8 @@ const projectList = [
 ];
 
 const SwitchProject = ({ requestClose, onManageProject, onSelectProject, params }) => {
-	const { projects } = params || {};
-	const [selectedProject, setSelectedProject] = useState(projects[0]);
+	const { projects, selectedProject: defaultProject } = params || {};
+	const [selectedProject, setSelectedProject] = useState(defaultProject);
 	const handleManageProject = () => {
 		onManageProject?.();
 		requestClose?.();

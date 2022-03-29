@@ -1,0 +1,16 @@
+mutation updateProject($id: String!, $input: UpdateProjectDto!) {
+	updateProject(id: $id, updateProject: $input) {
+		area
+		creatorId
+		endDate
+		id
+		imageUrl
+		latitude
+		location
+		longitude
+		name
+		projectType
+		startDate
+		imageUrl
+	}
+}

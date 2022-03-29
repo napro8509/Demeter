@@ -13,18 +13,25 @@ import Flex from '@components/Flex';
 import { Colors, Images } from '@assets';
 import useHeader from '@hooks/useHeader';
 import { useNavigation } from '@react-navigation/native';
+import { useGetDevicesLazyQuery } from '@graphql/generated/graphql';
 
 const categoryList = ['Power Switch', 'Nutrient Control...', 'Sensor', 'Camera'];
 
 const AddDevice = () => {
 	const navigation = useNavigation();
 	useHeader(navigation);
-
+	const [getDevices] = useGetDevicesLazyQuery();
 	const [categorySelected, setCategorySelected] = useState(undefined);
 
 	const handleConnectWifi = () => {
 		navigation.navigate('ConnectWifi');
 	};
+
+	useEffect(() => {
+		getDevices({
+			onCompleted: console.log,
+		});
+	}, []);
 
 	useEffect(() => {
 		navigation.setOptions({

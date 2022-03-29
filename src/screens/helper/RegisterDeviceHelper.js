@@ -35,7 +35,36 @@ const getDeviceInfo = ip => {
 		})
 		.catch(err => console.error(err));
 };
+
+const setParams = (ip, params = {}) => {
+	console.log(`http://${ip}/api/params`);
+	return fetch(`http://${ip}/api/params`, {
+		method: 'POST',
+		headers: {},
+		body: JSON.stringify(params),
+	})
+		.then(data => {
+			return data.json();
+		})
+		.catch(err => console.error(err));
+};
+
+const connectMQTT = ip => {
+	console.log(`http://${ip}/api/cmd/connect/mqtt`);
+
+	return fetch('http://${ip}/api/cmd/connect/mqtt', {
+		method: 'GET',
+		headers: {},
+	})
+		.then(data => {
+			return data.json();
+		})
+		.catch(err => console.error(err));
+};
+
 export default {
 	startSmartConfig,
 	getDeviceInfo,
+	setParams,
+	connectMQTT,
 };

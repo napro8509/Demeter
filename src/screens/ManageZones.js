@@ -26,16 +26,17 @@ const projectList = [
 
 const ManageZones = ({ navigation, route }) => {
 	useHeader(navigation);
-	const { projectId, groups } = route?.params || {};
-	console.log(groups);
+	const { projectId, groups = [] } = route?.params || {};
 	const handleCreateProject = () => {
 		navigation.navigate('CreateZones', {
 			projectId,
 		});
 	};
 
-	const handleGoProjectDetail = () => {
-		navigation.navigate('ZoneDetailScreen');
+	const handleGoProjectDetail = zoneData => {
+		navigation.navigate('ZoneDetailScreen', {
+			zoneData,
+		});
 	};
 
 	return (
@@ -44,7 +45,7 @@ const ManageZones = ({ navigation, route }) => {
 				{groups.map(item => (
 					<TouchableOpacity
 						style={styles.button}
-						onPress={handleGoProjectDetail}
+						onPress={() => handleGoProjectDetail(item)}
 						key={item.id}
 					>
 						<Image source={{ uri: item?.imageUrl }} style={styles.icon} />
