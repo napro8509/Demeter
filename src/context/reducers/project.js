@@ -1,20 +1,16 @@
-import { LOGIN_SUCCESS } from '../actions/types';
+import { LOGIN_SUCCESS, UPDATE_PROJECTS } from '../actions/types';
 
 export const projectInitState = {
-	accessToken: '',
+	projects: [],
 };
 
 export const projectReducer = (state = projectInitState, action) => {
 	const { type, payload } = action || {};
 	switch (type) {
-		case LOGIN_SUCCESS:
+		case UPDATE_PROJECTS:
 			return {
 				...state,
-			};
-		case 'HELLO':
-			console.log('OKOKOKO', payload);
-			return {
-				...state,
+				projects: payload,
 			};
 		default:
 			return projectInitState;

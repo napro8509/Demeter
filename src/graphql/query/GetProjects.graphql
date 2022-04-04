@@ -30,5 +30,13 @@ query getProjects {
 				token
 			}
 		}
+		devices {
+			deviceProfileId
+			deviceSerial
+			id
+			keyAndCerts
+			status
+			token
+		}
 	}
 }

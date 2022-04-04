@@ -1,0 +1,3 @@
+mutation updateThingState($thingName: String!, $input: UpdateThingStateDto!) {
+	updateThingState(thingName: $thingName, state: $input)
+}

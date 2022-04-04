@@ -34,6 +34,7 @@ import RegisterDevice from './screens/RegisterDevice';
 import CreateZones from './screens/CreateZones';
 import EditProject from './screens/EditProject';
 import DeviceSwitch from './screens/DeviceSwitch';
+import SetUpDevice from './screens/SetUpDevice';
 
 const Stack = createNativeStackNavigator();
 
@@ -197,6 +198,13 @@ const MainStackNavigator = () => (
 			}}
 			name='DeviceSwitch'
 			component={DeviceSwitch}
+		/>
+		<MainStack.Screen
+			options={{
+				title: 'Almost Done',
+			}}
+			name='SetUpDevice'
+			component={SetUpDevice}
 		/>
 	</MainStack.Navigator>
 );

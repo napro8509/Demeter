@@ -33,6 +33,7 @@ export type CreateCategoryDto = {
 };
 
 export type CreateDeviceDto = {
+  deviceId?: InputMaybe<Scalars['String']>;
   deviceProfileId?: InputMaybe<Scalars['String']>;
   deviceSerial?: InputMaybe<Scalars['String']>;
   groupId?: InputMaybe<Scalars['String']>;
@@ -77,6 +78,7 @@ export type CreateUserDeviceDto = {
 
 export type DeviceEntity = {
   __typename?: 'DeviceEntity';
+  deviceId?: Maybe<Scalars['String']>;
   deviceProfile?: Maybe<DeviceProfileEntity>;
   deviceProfileId?: Maybe<Scalars['String']>;
   deviceSerial?: Maybe<Scalars['String']>;
@@ -478,6 +480,7 @@ export type UpdateCategoryDto = {
 };
 
 export type UpdateDeviceDto = {
+  deviceId?: InputMaybe<Scalars['String']>;
   deviceSerial?: InputMaybe<Scalars['String']>;
   groupId?: InputMaybe<Scalars['String']>;
   projectId?: InputMaybe<Scalars['String']>;
@@ -585,6 +588,14 @@ export type RemoveGroupMutationVariables = Exact<{
 
 export type RemoveGroupMutation = { __typename?: 'Mutation', removeGroup: boolean };
 
+export type UpdateDeviceMutationVariables = Exact<{
+  id: Scalars['String'];
+  input: UpdateDeviceDto;
+}>;
+
+
+export type UpdateDeviceMutation = { __typename?: 'Mutation', updateDevice: { __typename?: 'DeviceEntity', deviceProfileId?: string | null | undefined, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, token: string } };
+
 export type UpdateProjectMutationVariables = Exact<{
   id: Scalars['String'];
   input: UpdateProjectDto;
@@ -592,6 +603,14 @@ export type UpdateProjectMutationVariables = Exact<{
 
 
 export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject: { __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, imageUrl?: string | null | undefined, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any } };
+
+export type UpdateThingStateMutationVariables = Exact<{
+  thingName: Scalars['String'];
+  input: UpdateThingStateDto;
+}>;
+
+
+export type UpdateThingStateMutation = { __typename?: 'Mutation', updateThingState: string };
 
 export type UploadImageMutationVariables = Exact<{
   input: Scalars['Upload'];
@@ -635,7 +654,7 @@ export type GetProfileQuery = { __typename?: 'Query', getProfile: { __typename?:
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any, imageUrl?: string | null | undefined, groups: Array<{ __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, projectId: string, imageUrl?: string | null | undefined, startDate: any, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId?: string | null | undefined, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, status?: string | null | undefined, token: string }> }> }> };
+export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'ProjectEntity', area: string, creatorId?: string | null | undefined, endDate: any, id: string, latitude?: string | null | undefined, location: string, longitude?: string | null | undefined, name: string, projectType: ProjectType, startDate: any, imageUrl?: string | null | undefined, groups: Array<{ __typename?: 'GroupEntity', area: string, creatorId: string, endDate: any, id: string, location: string, name: string, projectId: string, imageUrl?: string | null | undefined, startDate: any, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId?: string | null | undefined, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, status?: string | null | undefined, token: string }> }>, devices: Array<{ __typename?: 'DeviceEntity', deviceProfileId?: string | null | undefined, deviceSerial?: string | null | undefined, id: string, keyAndCerts?: string | null | undefined, status?: string | null | undefined, token: string }> }> };
 
 export type GetUserDevicesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -827,6 +846,44 @@ export function useRemoveGroupMutation(baseOptions?: Apollo.MutationHookOptions<
 export type RemoveGroupMutationHookResult = ReturnType<typeof useRemoveGroupMutation>;
 export type RemoveGroupMutationResult = Apollo.MutationResult<RemoveGroupMutation>;
 export type RemoveGroupMutationOptions = Apollo.BaseMutationOptions<RemoveGroupMutation, RemoveGroupMutationVariables>;
+export const UpdateDeviceDocument = gql`
+    mutation updateDevice($id: String!, $input: UpdateDeviceDto!) {
+  updateDevice(id: $id, updateDevice: $input) {
+    deviceProfileId
+    deviceSerial
+    id
+    keyAndCerts
+    token
+  }
+}
+    `;
+export type UpdateDeviceMutationFn = Apollo.MutationFunction<UpdateDeviceMutation, UpdateDeviceMutationVariables>;
+
+/**
+ * __useUpdateDeviceMutation__
+ *
+ * To run a mutation, you first call `useUpdateDeviceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateDeviceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateDeviceMutation, { data, loading, error }] = useUpdateDeviceMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateDeviceMutation(baseOptions?: Apollo.MutationHookOptions<UpdateDeviceMutation, UpdateDeviceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateDeviceMutation, UpdateDeviceMutationVariables>(UpdateDeviceDocument, options);
+      }
+export type UpdateDeviceMutationHookResult = ReturnType<typeof useUpdateDeviceMutation>;
+export type UpdateDeviceMutationResult = Apollo.MutationResult<UpdateDeviceMutation>;
+export type UpdateDeviceMutationOptions = Apollo.BaseMutationOptions<UpdateDeviceMutation, UpdateDeviceMutationVariables>;
 export const UpdateProjectDocument = gql`
     mutation updateProject($id: String!, $input: UpdateProjectDto!) {
   updateProject(id: $id, updateProject: $input) {
@@ -872,6 +929,38 @@ export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
 export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
+export const UpdateThingStateDocument = gql`
+    mutation updateThingState($thingName: String!, $input: UpdateThingStateDto!) {
+  updateThingState(thingName: $thingName, state: $input)
+}
+    `;
+export type UpdateThingStateMutationFn = Apollo.MutationFunction<UpdateThingStateMutation, UpdateThingStateMutationVariables>;
+
+/**
+ * __useUpdateThingStateMutation__
+ *
+ * To run a mutation, you first call `useUpdateThingStateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateThingStateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateThingStateMutation, { data, loading, error }] = useUpdateThingStateMutation({
+ *   variables: {
+ *      thingName: // value for 'thingName'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateThingStateMutation(baseOptions?: Apollo.MutationHookOptions<UpdateThingStateMutation, UpdateThingStateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateThingStateMutation, UpdateThingStateMutationVariables>(UpdateThingStateDocument, options);
+      }
+export type UpdateThingStateMutationHookResult = ReturnType<typeof useUpdateThingStateMutation>;
+export type UpdateThingStateMutationResult = Apollo.MutationResult<UpdateThingStateMutation>;
+export type UpdateThingStateMutationOptions = Apollo.BaseMutationOptions<UpdateThingStateMutation, UpdateThingStateMutationVariables>;
 export const UploadImageDocument = gql`
     mutation UploadImage($input: Upload!) {
   uploadImage(image: $input) {
@@ -1170,6 +1259,14 @@ export const GetProjectsDocument = gql`
         status
         token
       }
+    }
+    devices {
+      deviceProfileId
+      deviceSerial
+      id
+      keyAndCerts
+      status
+      token
     }
   }
 }

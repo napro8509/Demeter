@@ -1,0 +1,9 @@
+mutation updateDevice($id: String!, $input: UpdateDeviceDto!) {
+	updateDevice(id: $id, updateDevice: $input) {
+		deviceProfileId
+		deviceSerial
+		id
+		keyAndCerts
+		token
+	}
+}

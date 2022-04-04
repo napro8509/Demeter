@@ -22,7 +22,8 @@
 			"@hooks": ["hooks"],
 			"@navigation": ["navigation"],
 			"@constants": ["constants"],
-			"@graphql": ["graphql"]
+			"@graphql": ["graphql"],
+			"@context": ["context"]
 		}
 	},
 	"include": ["src"],

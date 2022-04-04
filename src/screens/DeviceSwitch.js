@@ -3,12 +3,30 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Flex from '@components/Flex';
 import { Colors, Images } from '@assets';
 import { useHeader } from '@hooks';
+import { useUpdateThingStateMutation } from '@graphql/generated/graphql';
 
-const DeviceSwitch = ({ navigation }) => {
+const DeviceSwitch = ({ navigation, route }) => {
+	const { deviceId } = route?.params || {};
+	const [updateThing] = useUpdateThingStateMutation();
 	useHeader(navigation);
 	const [isEnabled, setEnabled] = useState(false);
 	const handleEnable = () => {
-		setEnabled(!isEnabled);
+		updateThing({
+			variables: {
+				thingName: deviceId,
+				input: {
+					fields: [
+						{
+							key: 'switch',
+							value: !isEnabled ? 'on' : 'off',
+						},
+					],
+				},
+			},
+			onCompleted: () => {
+				setEnabled(!isEnabled);
+			},
+		});
 	};
 
 	return (

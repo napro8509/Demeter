@@ -30,6 +30,8 @@ export const middleware = (state, dispatchMiddleware) => {
 
 				dispatch({ type: 'UPDATE_SENT_MESSAGES', payload: sMessages });
 				break;
+			default:
+				dispatch({ type: action?.type, payload: action?.payload });
 		}
 	};
 };

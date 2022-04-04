@@ -77,8 +77,20 @@ const RegisterDevice = ({ navigation, route }) => {
 					})
 				)
 				.then(() => RegisterDeviceHelper.connectMQTT(ip.current))
-				.then(() => RegisterDeviceHelper.getDeviceInfo(ip.current));
+				.then(() => handleCheckConnect(id));
 		}
+	};
+
+	const handleCheckConnect = id => {
+		setTimeout(() => {
+			RegisterDeviceHelper.getDeviceInfo(ip.current).then(response => {
+				if (response?.data?.connection?.mqtt_server?.status === 'connected') {
+					navigation.navigate('SetUpDevice', {
+						deviceId: id,
+					});
+				}
+			});
+		}, 3000);
 	};
 
 	const getInfo = () => {

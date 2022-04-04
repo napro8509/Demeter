@@ -5,13 +5,22 @@ import {
 } from '@graphql/generated/graphql';
 import useDispatch from '../context/useDispatch';
 import React, { useEffect, useRef, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+	DeviceEventEmitter,
+	Image,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
 import AppNavigator from '../navigation/AppNavigator';
 import SwitchProject from '../popup/SwitchProject';
 import DeviceHelper from '../utils/DeviceHelper';
+import { UPDATE_PROJECTS } from '@context/actions/types';
 
 const HomeScreen = ({ navigation }) => {
 	const [activeTab, setActiveTab] = useState('ALl');
@@ -24,18 +33,30 @@ const HomeScreen = ({ navigation }) => {
 	const [getGroups] = useGetGroupsLazyQuery();
 	const dispatch = useDispatch('dispatchProjectMiddleWare');
 
+	const allDevices = selectedProject?.devices || [];
+	const [devices, setDevices] = useState([]);
 	useEffect(() => {
 		handleGetProject();
 		getDevices({
-			onCompleted: console.log,
+			onCompleted: handleGetDeviceSuccess,
 		});
 	}, []);
+
+	const handleGetDeviceSuccess = response => {
+		if (response?.devices?.length > 0) {
+			setDevices(response?.devices);
+		}
+	};
 
 	useEffect(() => {
 		if (selectedProject?.id) {
 			setGroups(allGroups.current?.filter(item => item.projectId === selectedProject?.id));
 		}
 	}, [selectedProject]);
+
+	useEffect(() => {
+		DeviceEventEmitter.addListener('UPDATE_PROJECT', handleGetProject);
+	}, []);
 
 	const handleGetProject = () => {
 		getProjects({
@@ -45,7 +66,7 @@ const HomeScreen = ({ navigation }) => {
 					projects.current = response?.projects;
 					setSelectedProject(response?.projects?.[0]);
 					dispatch({
-						type: 'HELLO',
+						type: UPDATE_PROJECTS,
 						payload: response?.projects,
 					});
 				}
@@ -97,8 +118,14 @@ const HomeScreen = ({ navigation }) => {
 		});
 	};
 
-	const handleGoDeviceControl = () => {
-		navigation.navigate('DeviceSwitch');
+	const handleGoDeviceControl = id => {
+		navigation.navigate('DeviceSwitch', {
+			deviceId: id,
+		});
+	};
+
+	const handleRegisterDevice = () => {
+		navigation.navigate('SetUpDevice');
 	};
 
 	const tabList = [
@@ -138,7 +165,7 @@ const HomeScreen = ({ navigation }) => {
 				<View style={styles.cameraBlock}>
 					<Image source={Images.ic_camera_new} style={styles.iconCamera} />
 					<Text style={styles.cameraText}>You have 3 cameras</Text>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={handleRegisterDevice}>
 						<Text style={styles.viewText}>View</Text>
 					</TouchableOpacity>
 				</View>
@@ -160,16 +187,18 @@ const HomeScreen = ({ navigation }) => {
 					</TouchableOpacity>
 				</View>
 				<View style={styles.rowBlock}>
-					<TouchableOpacity onPress={handleGoDeviceControl}>
-						<Image source={Images.img_light_demo} style={styles.demoLight} />
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<Image source={Images.img_water_demo} style={styles.demoLight} />
-					</TouchableOpacity>
+					{devices.map(item => (
+						<TouchableOpacity
+							onPress={() => handleGoDeviceControl(item.id)}
+							style={{ marginTop: 12 }}
+						>
+							<Image source={Images.img_light_demo} style={styles.demoLight} />
+						</TouchableOpacity>
+					))}
 				</View>
-				<TouchableOpacity>
+				{/* <TouchableOpacity>
 					<Image source={Images.img_demo_indoor_camera} style={styles.demoIndoor} />
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 			</View>
 		</SafeAreaView>
 	);
@@ -266,6 +295,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		marginTop: 24,
+		flexWrap: 'wrap',
 	},
 	demoLight: {
 		width: (DeviceHelper.screenWidth - 56) / 2,
