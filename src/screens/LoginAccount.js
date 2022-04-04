@@ -36,8 +36,7 @@ const LoginAccount = ({ navigation }) => {
 	const userNameRef = createRef();
 	const passWordRef = createRef();
 
-	const authState = useSelector('authState');
-	const dispatch = useDispatch('authDispatch');
+	const dispatch = useDispatch('dispatchMiddleWare');
 	useEffect(() => {
 		Keyboard.addListener('keyboardDidShow', handleScrollEnd);
 		touchableRef.current = userNameRef.current;
@@ -63,7 +62,7 @@ const LoginAccount = ({ navigation }) => {
 						},
 					});
 					AsyncStorage.setItem(ASYNC_AUTH_TOKEN, data?.login?.accessToken);
-					navigation.navigate('MainTab');
+					navigation.navigate('HomeScreen');
 				}
 			})
 			.catch(err => {

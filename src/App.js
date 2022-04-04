@@ -46,6 +46,7 @@ const MainStackNavigator = () => (
 			component={SplashScreen}
 			options={{
 				headerTransparent: true,
+				headerShown: false,
 			}}
 		/>
 		<MainStack.Screen
@@ -65,7 +66,13 @@ const MainStackNavigator = () => (
 				headerShown: false,
 			}}
 		/>
-		<MainStack.Screen name='HomeScreen' component={HomeScreen} />
+		<MainStack.Screen
+			name='HomeScreen'
+			component={HomeScreen}
+			options={{
+				headerShown: false,
+			}}
+		/>
 		<MainStack.Screen name='RequestScreen' component={RequestScreen} />
 		<MainStack.Screen
 			options={{
@@ -85,13 +92,13 @@ const MainStackNavigator = () => (
 			name='RegisterSuccess'
 			component={RegisterSuccess}
 		/>
-		<MainStack.Screen
+		{/* <MainStack.Screen
 			options={{
 				headerShown: false,
 			}}
 			name='MainTab'
 			component={MainTab}
-		/>
+		/> */}
 		<MainStack.Screen
 			options={{
 				title: 'Add Project',
@@ -106,13 +113,7 @@ const MainStackNavigator = () => (
 			name='CreateProjectScreen'
 			component={CreateProject}
 		/>
-		<MainStack.Screen
-			options={{
-				title: 'Create Project',
-			}}
-			name='TestScreen'
-			component={Test}
-		/>
+
 		<MainStack.Screen
 			options={{
 				title: 'Manage Projects',

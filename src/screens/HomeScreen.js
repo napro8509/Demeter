@@ -3,6 +3,7 @@ import {
 	useGetDevicesLazyQuery,
 	useGetGroupsLazyQuery,
 } from '@graphql/generated/graphql';
+import useDispatch from '../context/useDispatch';
 import React, { useEffect, useRef, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -21,6 +22,8 @@ const HomeScreen = ({ navigation }) => {
 	const [getProjects] = useGetProjectsLazyQuery();
 	const [getDevices] = useGetDevicesLazyQuery();
 	const [getGroups] = useGetGroupsLazyQuery();
+	const dispatch = useDispatch('dispatchProjectMiddleWare');
+
 	useEffect(() => {
 		handleGetProject();
 		getDevices({
@@ -41,6 +44,10 @@ const HomeScreen = ({ navigation }) => {
 				if (response?.projects?.length > 0) {
 					projects.current = response?.projects;
 					setSelectedProject(response?.projects?.[0]);
+					dispatch({
+						type: 'HELLO',
+						payload: response?.projects,
+					});
 				}
 				getGroups({
 					onCompleted: handleGetGroupsSuccess,

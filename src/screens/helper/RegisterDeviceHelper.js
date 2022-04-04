@@ -5,22 +5,24 @@ const startSmartConfig = ({ wifiName, password }) => {
 	const TIME_OUT_SMART_CONFIG = 30 * 1000; // 30s
 	let foundDevice = false;
 	return new Promise((resolve, reject) => {
-		SmartConfig.start(wifiName, wifiBssid, password, TIME_OUT_SMART_CONFIG, event => {
-			console.log(event);
-			let { eventName, data } = event;
-			if (eventName === 'onFoundDevice') {
-				foundDevice = true;
-				data = JSON.parse(data);
-				resolve(data);
-				// data in event is ip of ESP
-				console.log('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
-			} else {
-				if (!foundDevice) {
-					reject('Not found');
-					console.log('Not found');
-				}
-			}
-		});
+		resolve({ ip: '10.67.3.164' });
+		// SmartConfig.start(wifiName, wifiBssid, password, TIME_OUT_SMART_CONFIG, event => {
+		// 	console.log(event);
+		// 	let { eventName, data } = event;
+		// 	if (eventName === 'onFoundDevice') {
+		// 		foundDevice = true;
+		// 		data = JSON.parse(data);
+		// 		console.log(data);
+		// 		resolve(data);
+		// 		// data in event is ip of ESP
+		// 		console.log('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
+		// 	} else {
+		// 		if (!foundDevice) {
+		// 			reject('Not found');
+		// 			console.log('Not found');
+		// 		}
+		// 	}
+		// });
 	});
 };
 
@@ -36,15 +38,22 @@ const getDeviceInfo = ip => {
 		.catch(err => console.error(err));
 };
 
-const setParams = (ip, params = {}) => {
+const setParams = (ip = '10.67.3.91', params = {}) => {
 	console.log(`http://${ip}/api/params`);
 	return fetch(`http://${ip}/api/params`, {
 		method: 'POST',
-		headers: {},
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
 		body: JSON.stringify(params),
 	})
 		.then(data => {
 			return data.json();
+		})
+		.then(response => {
+			console.log(response);
+			return response;
 		})
 		.catch(err => console.error(err));
 };
@@ -52,7 +61,7 @@ const setParams = (ip, params = {}) => {
 const connectMQTT = ip => {
 	console.log(`http://${ip}/api/cmd/connect/mqtt`);
 
-	return fetch('http://${ip}/api/cmd/connect/mqtt', {
+	return fetch(`http://${ip}/api/cmd/connect/mqtt`, {
 		method: 'GET',
 		headers: {},
 	})

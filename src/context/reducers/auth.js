@@ -12,7 +12,9 @@ export const authReducer = (state = authInitState, action) => {
 				...state,
 				accessToken: payload.accessToken,
 			};
+		case 'HEHE':
 		default:
+			console.log('HELE');
 			return authInitState;
 	}
 };

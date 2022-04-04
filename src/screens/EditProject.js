@@ -19,6 +19,7 @@ const EditProject = ({ navigation, route }) => {
 		area: areaDefault,
 		location: locationDefault,
 		name: nameDefault,
+		projectType,
 	} = projectData || {};
 	const [imageSource, setImageSource] = useState(imageUrl);
 	const [name, setName] = useState(nameDefault || '');
@@ -53,6 +54,7 @@ const EditProject = ({ navigation, route }) => {
 			startDate: new Date().toDateString(),
 			endDate: new Date().toDateString(),
 			imageUrl: imageSource,
+			projectType,
 		});
 		updateProject({
 			variables: {
@@ -63,6 +65,7 @@ const EditProject = ({ navigation, route }) => {
 					startDate: new Date().toDateString(),
 					endDate: new Date().toDateString(),
 					imageUrl: imageSource,
+					projectType,
 				},
 				id: projectId,
 			},

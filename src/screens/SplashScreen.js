@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useGetProfileLazyQuery } from '@graphql/generated/graphql';
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { ASYNC_AUTH_TOKEN } from '../constants';
 
 const SplashScreen = ({ navigation }) => {
@@ -16,13 +16,14 @@ const SplashScreen = ({ navigation }) => {
 					onCompleted: data => {
 						console.log('data', data);
 						if (data) {
-							navigation?.replace('MainTab');
+							navigation?.replace('HomeScreen');
 						} else {
 							navigation?.replace('LoginMain');
 						}
 					},
 				});
 			} else {
+				navigation?.replace('LoginMain');
 			}
 		});
 	}, []);
