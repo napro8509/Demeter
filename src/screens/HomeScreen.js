@@ -37,10 +37,14 @@ const HomeScreen = ({ navigation }) => {
 	const [devices, setDevices] = useState([]);
 	useEffect(() => {
 		handleGetProject();
+		handleGetDevice();
+	}, []);
+
+	const handleGetDevice = () => {
 		getDevices({
 			onCompleted: handleGetDeviceSuccess,
 		});
-	}, []);
+	};
 
 	const handleGetDeviceSuccess = response => {
 		if (response?.devices?.length > 0) {
@@ -55,7 +59,10 @@ const HomeScreen = ({ navigation }) => {
 	}, [selectedProject]);
 
 	useEffect(() => {
-		DeviceEventEmitter.addListener('UPDATE_PROJECT', handleGetProject);
+		DeviceEventEmitter.addListener('UPDATE_PROJECT', () => {
+			handleGetProject();
+			handleGetDevice();
+		});
 	}, []);
 
 	const handleGetProject = () => {
