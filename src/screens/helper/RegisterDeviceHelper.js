@@ -1,28 +1,24 @@
-import SmartConfig from 'react-native-smartconfig-quan';
-const wifiBssid = '8a:29:9c:69:af:9b';
+// import SmartConfig from 'react-native-smartconfig-quan';
+// import Smartconfig from 'react-native-smartconfig';
+import SmartConfigP from 'react-native-smart-config-p';
+const wifiBssid = 'b0:a7:b9:89:a2:f6';
 
 const startSmartConfig = ({ wifiName, password }) => {
-	const TIME_OUT_SMART_CONFIG = 30 * 1000; // 30s
-	let foundDevice = false;
 	return new Promise((resolve, reject) => {
-		// resolve({ ip: '10.67.3.164' });
-		SmartConfig.start(wifiName, wifiBssid, password, TIME_OUT_SMART_CONFIG, event => {
-			console.log(event);
-			let { eventName, data } = event;
-			if (eventName === 'onFoundDevice') {
-				foundDevice = true;
-				data = JSON.parse(data);
-				console.log(data);
-				resolve(data);
-				// data in event is ip of ESP
-				console.log('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
-			} else {
-				if (!foundDevice) {
-					reject('Not found');
-					console.log('Not found');
+		SmartConfigP.start({
+			ssid: wifiName,
+			password: password,
+			bssid: wifiBssid, // Mac address of Mobile
+			count: 1, //Number Esp
+			cast: 'broadcast', // boardcast or multicast
+		})
+			.then(function (results) {
+				console.log(results);
+				if (results?.[0]) {
+					resolve(results?.[0]);
 				}
-			}
-		});
+			})
+			.catch(err => console.log(err));
 	});
 };
 
@@ -35,10 +31,10 @@ const getDeviceInfo = ip => {
 		.then(data => {
 			return data.json();
 		})
-		.catch(err => console.error(err));
+		.catch(err => console.log(err));
 };
 
-const setParams = (ip = '10.67.3.91', params = {}) => {
+const setParams = (ip = '', params = {}) => {
 	console.log(`http://${ip}/api/params`);
 	return fetch(`http://${ip}/api/params`, {
 		method: 'POST',
@@ -55,7 +51,7 @@ const setParams = (ip = '10.67.3.91', params = {}) => {
 			console.log(response);
 			return response;
 		})
-		.catch(err => console.error(err));
+		.catch(err => console.log(err));
 };
 
 const connectMQTT = ip => {
@@ -68,7 +64,7 @@ const connectMQTT = ip => {
 		.then(data => {
 			return data.json();
 		})
-		.catch(err => console.error(err));
+		.catch(err => console.log(err));
 };
 
 export default {

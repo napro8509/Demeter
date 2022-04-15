@@ -12,7 +12,7 @@ import LoginAccount from './screens/LoginAccount';
 import LoginMain from './screens/LoginMain';
 import RegisterScreen from './screens/RegisterScreen';
 import RequestScreen from './screens/RequestScreen';
-import SmartConfig from './screens/SmartConfig';
+// import SmartConfig from './screens/SmartConfig';
 import DeviceHelper from './utils/DeviceHelper';
 import RegisterSuccess from './screens/RegisterSuccess';
 import MainTab from './screens/MainTab';
@@ -59,7 +59,7 @@ const MainStackNavigator = () => (
 				headerTransparent: true,
 			}}
 		/>
-		<MainStack.Screen name='SmartConfig' component={SmartConfig} />
+		{/* <MainStack.Screen name='SmartConfig' component={SmartConfig} /> */}
 		<MainStack.Screen
 			name='LoginMain'
 			component={LoginMain}

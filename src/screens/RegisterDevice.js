@@ -100,7 +100,7 @@ const RegisterDevice = ({ navigation, route }) => {
 	const startBroadcast = () => {
 		RegisterDeviceHelper.startSmartConfig({ wifiName, password })
 			.then(data => {
-				const { ip: ipv4 } = data || {};
+				const { ipv4 } = data || {};
 				ip.current = ipv4;
 				createDevice({
 					variables: {
