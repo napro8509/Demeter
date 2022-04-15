@@ -16,7 +16,7 @@ const SplashScreen = ({ navigation }) => {
 					onCompleted: data => {
 						console.log('data', data);
 						if (data) {
-							navigation?.replace('HomeScreen');
+							navigation?.replace('MainStack');
 						} else {
 							navigation?.replace('LoginMain');
 						}

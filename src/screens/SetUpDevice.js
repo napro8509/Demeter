@@ -46,8 +46,8 @@ const SetUpDevice = ({ route, navigation }) => {
 			{
 				text: 'Ok',
 				onPress: () => {
-					DeviceEventEmitter.emit('UPDATE_PROJECT');
 					navigation.popToTop();
+					DeviceEventEmitter.emit('UPDATE_PROJECT');
 				},
 			},
 		]);

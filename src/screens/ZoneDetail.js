@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, DeviceEventEmitter, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
 import Flex from '../components/Flex';
@@ -54,7 +54,13 @@ const ZoneDetail = ({ navigation, route }) => {
 
 	const handleUpdate = () => {
 		Alert.alert('Notification', 'Remove zone successfully', [
-			{ text: 'Ok', onPress: navigation.popToTop() },
+			{
+				text: 'Ok',
+				onPress: () => {
+					navigation.popToTop();
+					DeviceEventEmitter.emit('UPDATE_PROJECT');
+				},
+			},
 		]);
 	};
 

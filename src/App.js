@@ -39,10 +39,12 @@ import SetUpDevice from './screens/SetUpDevice';
 const Stack = createNativeStackNavigator();
 
 const MainStack = createNativeStackNavigator();
+const AppStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
 
-const MainStackNavigator = () => (
-	<MainStack.Navigator initialRouteName='SplashScreen'>
-		<MainStack.Screen
+const AuthStackNavigator = () => (
+	<AuthStack.Navigator>
+		<AuthStack.Screen
 			name='SplashScreen'
 			component={SplashScreen}
 			options={{
@@ -50,7 +52,7 @@ const MainStackNavigator = () => (
 				headerShown: false,
 			}}
 		/>
-		<MainStack.Screen
+		<AuthStack.Screen
 			name='LoginAccount'
 			component={LoginAccount}
 			options={{
@@ -59,14 +61,37 @@ const MainStackNavigator = () => (
 				headerTransparent: true,
 			}}
 		/>
-		{/* <MainStack.Screen name='SmartConfig' component={SmartConfig} /> */}
-		<MainStack.Screen
+		<AuthStack.Screen
 			name='LoginMain'
 			component={LoginMain}
 			options={{
 				headerShown: false,
 			}}
 		/>
+	</AuthStack.Navigator>
+);
+
+const AppStackNavigator = () => (
+	<AppStack.Navigator initialRouteName='AuthStack'>
+		<AppStack.Screen
+			name='MainStack'
+			component={MainStackNavigator}
+			options={{
+				headerShown: false,
+			}}
+		/>
+		<AppStack.Screen
+			name='AuthStack'
+			component={AuthStackNavigator}
+			options={{
+				headerShown: false,
+			}}
+		/>
+	</AppStack.Navigator>
+);
+
+const MainStackNavigator = () => (
+	<MainStack.Navigator initialRouteName='HomeScreen'>
 		<MainStack.Screen
 			name='HomeScreen'
 			component={HomeScreen}
@@ -93,13 +118,6 @@ const MainStackNavigator = () => (
 			name='RegisterSuccess'
 			component={RegisterSuccess}
 		/>
-		{/* <MainStack.Screen
-			options={{
-				headerShown: false,
-			}}
-			name='MainTab'
-			component={MainTab}
-		/> */}
 		<MainStack.Screen
 			options={{
 				title: 'Add Project',
@@ -243,7 +261,7 @@ function App() {
 							}}
 						>
 							<Stack.Group>
-								<Stack.Screen name='MainStack' component={MainStackNavigator} />
+								<Stack.Screen name='AppStack' component={AppStackNavigator} />
 							</Stack.Group>
 							<Stack.Group
 								screenOptions={{

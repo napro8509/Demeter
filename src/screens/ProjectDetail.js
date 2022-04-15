@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, DeviceEventEmitter, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../assets/colors';
 import Images from '../assets/images';
 import Flex from '../components/Flex';
@@ -86,7 +86,13 @@ const ProjectDetail = ({ navigation, route }) => {
 			onCompleted: response => {
 				if (response?.removeProject) {
 					Alert.alert('Notification', 'Remove project successfully', [
-						{ text: 'Ok', onPress: navigation.popToTop() },
+						{
+							text: 'Ok',
+							onPress: () => {
+								navigation.popToTop();
+								DeviceEventEmitter.emit('UPDATE_PROJECT');
+							},
+						},
 					]);
 				}
 			},

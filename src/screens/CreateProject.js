@@ -1,5 +1,14 @@
 import React from 'react';
-import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+	Alert,
+	DeviceEventEmitter,
+	Image,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native';
 import Images from '../assets/images';
 import { Button } from '../components';
 import Flex from '../components/Flex';
@@ -63,7 +72,13 @@ const CreateProject = ({ navigation, route }) => {
 			},
 			onCompleted: () => {
 				Alert.alert('Notification', 'Create project successfully', [
-					{ text: 'Ok', onPress: navigation.popToTop() },
+					{
+						text: 'Ok',
+						onPress: () => {
+							navigation.popToTop();
+							DeviceEventEmitter.emit('UPDATE_PROJECT');
+						},
+					},
 				]);
 			},
 			onError: console.log,
@@ -78,7 +93,7 @@ const CreateProject = ({ navigation, route }) => {
 						source={
 							imageSource
 								? {
-									uri: imageSource,
+										uri: imageSource,
 								  }
 								: Images.ic_add_image
 						}

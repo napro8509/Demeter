@@ -62,7 +62,7 @@ const LoginAccount = ({ navigation }) => {
 						},
 					});
 					AsyncStorage.setItem(ASYNC_AUTH_TOKEN, data?.login?.accessToken);
-					navigation.navigate('HomeScreen');
+					navigation.navigate('MainStack');
 				}
 			})
 			.catch(err => {
